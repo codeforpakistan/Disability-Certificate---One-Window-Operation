@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Applicant;
+use App\Models\ApplicantAssesment;
+use App\Models\ApplicantVerification;
+use App\Models\Resource;
 
 class User extends Authenticatable
 {
@@ -17,7 +22,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-
+    use SoftDeletes;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +32,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -58,4 +65,28 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the applicants that a user has registered.
+     */
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the assessments that a user did.
+     */
+    public function assessments()
+    {
+        return $this->hasMany(ApplicantAssesment::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the verifications that a user did.
+     */
+    public function verification()
+    {
+        return $this->hasMany(ApplicantVerification::class, 'user_id', 'id');
+    }
 }
