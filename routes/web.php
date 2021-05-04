@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
-        Route::resource('/applications', 'ApplicationController');    
+        Route::resource('/applications', 'ApplicationController', ['only' => ['index', 'store', 'create']]);    
     });
     
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Applicant;
 
 class ApplicationController extends Controller
 {
@@ -14,7 +15,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return view('admin.applicant.create');
+        return view('admin.applicant.create-stage1');
     }
 
     /**
@@ -24,7 +25,7 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.applicant.create-stage2');
     }
 
     /**
@@ -35,7 +36,27 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'cnic' => ['required', 'unique:applicants'],
+            'dob' => ['required', 'before:today', 'after:1900-01-01'],
+            'name' => ['required'],
+            'father_name' => ['required'],
+            'phone_no' => ['required'],
+            'address' => ['required'],
+            'gender' => ['required'],
+            'marital_status' => ['required'],
+            'qualification' => ['required'],
+            'type_of_disability' => ['required'],
+            'nature_of_disability' => ['required'],
+            'cause_of_disability' => ['required'],
+            'source_of_income' => ['required'],
+            'type_of_job' => ['required'],
+        ]);
+        $data = $request->except(['_token']);
+        $data['user_id'] = \Auth::id();
+        $data['status'] = "2";
+        $applicant = Applicant::create($data);
+        return redirect()->route('admin.applications.create', ['applicant_id' => $applicant->id]);
     }
 
     /**
