@@ -23,9 +23,16 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.applicant.create-stage2');
+        if ( ! $request->has('applicant_id') ) {
+            return redirect()->route('admin.applications.index');
+        }
+        $applicant = Applicant::with('resources')->find($request->applicant_id);
+        return view('admin.applicant.create-stage2', [
+            'applicant' => $applicant,
+            'resources' => $applicant->resources,
+        ]);
     }
 
     /**
