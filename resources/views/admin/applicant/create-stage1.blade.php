@@ -23,12 +23,12 @@
                         <div class="md:flex mb-6">
                             <div class="md:w-1/6">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="cnic">
-                                    CNIC No.
+                                    CNIC/CRC No.
                                 </label>
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="cnic" name="cnic" type="text" value="" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
-                                <p class="py-2 text-sm text-gray-600">Enter The patient's CNIC or Form B.</p>
+                                <p class="py-2 text-sm text-gray-600">Enter The patient's CNIC or CRC.</p>
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="dob">
