@@ -61,31 +61,62 @@ class ApplicationController extends Controller
         ]);
         $data = $request->except(['_token']);
         $data['user_id'] = \Auth::id();
-        $data['status'] = "2";
+        $data['status'] = "1";
         $applicant = Applicant::create($data);
         return redirect()->route('admin.applications.create', ['applicant_id' => $applicant->id]);
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for CRPD verification the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function verification(Request $request, $id)
     {
-        //
+        $applicant = Applicant::with('resources')->find($id);
+        return view('admin.applicant.create-stage4', [
+            'applicant' => $applicant,
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for CRPD verification the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function issueCertificate(Request $request, $id)
     {
-        //
+        if ($request->has('issue') && $request->issue == 'yes') {
+            $applicant = Applicant::with('resources')->find($id);
+            $applicant->status = 5;
+            $applicant->save();
+        } else {
+            $applicant = Applicant::with('resources')->find($id);
+            $applicant->status = 8;
+            $applicant->save();
+            return redirect()->route('dashboard', ['cnic' => $applicant->cnic])->with('success', 'Verification complete.');
+        }
+        $applicant = Applicant::with('resources')->find($id);
+        
+        return view('admin.applicant.create-stage5', [
+            'applicant' => $applicant,
+        ]);
+    }
+
+    /**
+     * Show the form for assessment the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function assessment(Request $request, $id)
+    {
+        $applicant = Applicant::with('resources')->find($id);
+        return view('admin.applicant.create-stage3', [
+            'applicant' => $applicant,
+        ]);
     }
 
     /**

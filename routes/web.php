@@ -21,6 +21,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::resource('applications', 'ApplicationController', ['only' => ['index', 'store', 'create', 'update']]);    
+        Route::get('applications/{id}/assessment', 'ApplicationController@assessment')->name('applications.assessment');    
+        Route::get('applications/{id}/verification', 'ApplicationController@verification')->name('applications.verification');    
+        Route::post('applications/{id}/issue-certificate', 'ApplicationController@issueCertificate')->name('applications.issueCertificate');    
+        Route::resource('assessments', 'AssessmentController', ['only' => ['store']]);    
         Route::resource('resources', 'ResourceController', ['only' => ['store']]);    
     });
     

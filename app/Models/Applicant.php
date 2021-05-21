@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\User;
 use App\Models\ApplicantAssesment;
 use App\Models\ApplicantVerification;
@@ -15,6 +16,16 @@ class Applicant extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use LogsActivity;
+    
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'dob' => 'date',
+    ];
 
     /**
      * The attributes that are mass assignable.

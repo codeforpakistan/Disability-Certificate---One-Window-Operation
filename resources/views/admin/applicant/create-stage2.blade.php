@@ -63,7 +63,7 @@
                 <div class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
                     <form method="POST" action="{{ route('admin.applications.update', [$applicant->id]) }}">
                         @method("PUT")
-                        <input type="hidden" name="status" value="3">
+                        <input type="hidden" name="status" value="2">
                         @csrf
                         <div class="grid grid-cols-1 gap-2 place-items-end">
                             <button class="shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
