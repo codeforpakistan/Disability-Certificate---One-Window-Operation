@@ -15,12 +15,25 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $applicant = NULL;
+        $applicants = collect([]);
         if ($request->has('cnic')) {
-            $applicant = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->first();
+            $applicants = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->paginate(10);
+        } else {
+            if (\Auth::user()->role == 'Assessment') {
+                $applicants = Applicant::where('status', 2)
+                    // ->whereHas('assessments', function($q) {
+                    //     $q->where('user_id', \Auth::id());
+                    // })
+                    ->orderBy("created_at", 'DESC')
+                    // ->has('assessments', '=', 0)
+                    ->paginate(10);
+            }
+            if (\Auth::user()->role == 'CRPD') {
+                $applicants = Applicant::where('status', 3)->orderBy("created_at", 'DESC')->paginate(10);
+            }
         }
         return view('dashboard', [
-            'applicant' => $applicant,
+            'applicants' => $applicants,
         ]);
     }
 
