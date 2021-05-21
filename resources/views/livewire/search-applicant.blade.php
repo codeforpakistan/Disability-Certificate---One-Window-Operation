@@ -1,7 +1,8 @@
 <div class="grid grid-cols-1 gap-2 place-items-center">
     <form class="m-6 flex">
-        <input class="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="Enter CNIC / CRC" id="cnic" name="cnic" type="text" value="" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required/>
+        <input class="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="Enter CNIC / CRC" id="cnic" name="cnic" type="text" value="{{ request()->has('cnic') ? request()->input('cnic'): "" }}" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required/>
         <button class="px-8 rounded-r-lg bg-green-700  text-white font-bold p-4 uppercase border-green-900 border-t border-b border-r">Search Applicant</button>
+        <a href="{{ route('dashboard') }}" class="px-8 font-bold p-4 uppercase">Reset</a>
     </form>
     
     <div class="m-6 flex">

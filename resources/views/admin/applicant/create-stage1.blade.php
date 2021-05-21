@@ -184,13 +184,10 @@
                                 <p class="py-2 text-sm text-gray-600">Write type of job (that patient can do or is doing).</p>
                             </div>
                         </div>
-                        <div class="md:flex md:items-center">
-                            <div class="md:w-1/6"></div>
-                            <div class="md:w-2/6">
-                                <button class="shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                                    Save
-                                </button>
-                            </div>
+                        <div class="grid grid-cols-1 gap-2 place-items-end">
+                            <button class="shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                                Save and Proceed to Document Upload
+                            </button>
                         </div>
                     </form>
                 </div>

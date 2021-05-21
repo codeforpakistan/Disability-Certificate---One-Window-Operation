@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\ApplicantAssesment;
 use App\Models\ApplicantVerification;
 use App\Models\Resource;
+use App\Models\Status;
 
 class Applicant extends Model
 {
@@ -46,6 +47,14 @@ class Applicant extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the status for this applicant.
+     */
+    public function applicationStatus()
+    {
+        return $this->belongsTo(Status::class, 'status', 'id');
     }
 
     /**

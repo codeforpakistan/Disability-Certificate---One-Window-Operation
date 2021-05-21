@@ -17,12 +17,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return redirect()->route('dashboard');
     });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', "Admin\DashboardController@index")->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
-        Route::resource('applications', 'ApplicationController', ['only' => ['index', 'store', 'create']]);    
+        Route::resource('applications', 'ApplicationController', ['only' => ['index', 'store', 'create', 'update']]);    
         Route::resource('resources', 'ResourceController', ['only' => ['store']]);    
     });
     

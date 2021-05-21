@@ -97,7 +97,11 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request = $request->except(['_method', '_token']);
+        $applicant = Applicant::with('resources')->find($id)->update($request);
+        if ($applicant) {
+            return redirect()->route('dashboard')->with('success', 'Applicant data submitted for clinical assessment.');
+        }
     }
 
     /**
