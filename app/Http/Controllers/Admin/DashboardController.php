@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $applicants = collect([]);
+        $applicants = collect([])->paginate(10);
         if ($request->has('cnic')) {
             $applicants = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->paginate(10);
         } else {
