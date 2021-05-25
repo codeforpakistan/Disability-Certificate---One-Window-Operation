@@ -45,7 +45,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center rounded-lg text-lg" role="group">
                                         @if(\Auth::user()->role == 'Help Desk')
-                                            {{-- <button class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Edit Info</button> --}}
+                                            <a href="{{ route('admin.applications.create', ['applicant_id' => $applicant->id]) }}" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Upload Documents</a>
                                         @endif
                                         @if(\Auth::user()->role == 'Assessment' && $applicant->status == 2 && $assessment == 0 )
                                             <a href="{{ route("admin.applications.assessment", [$applicant->id]) }}" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Start Assessment</a>

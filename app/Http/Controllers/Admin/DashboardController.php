@@ -27,9 +27,14 @@ class DashboardController extends Controller
                     ->orderBy("created_at", 'DESC')
                     // ->has('assessments', '=', 0)
                     ->paginate(10);
-            }
-            if (\Auth::user()->role == 'CRPD') {
-                $applicants = Applicant::where('status', 3)->orderBy("created_at", 'DESC')->paginate(10);
+            } else if (\Auth::user()->role == 'CRPD') {
+                $applicants = Applicant::where('status', 3)
+                    ->orderBy("created_at", 'DESC')
+                    ->paginate(10);
+            } else if (\Auth::user()->role == 'Help Desk') {
+                $applicants = Applicant::where('status', 1)
+                    ->orderBy("created_at", 'DESC')
+                    ->paginate(10);
             }
         }
         return view('dashboard', [
