@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
+use Closure;
+use Auth;
 
 class VerifyCsrfToken extends Middleware
 {
