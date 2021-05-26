@@ -28,7 +28,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="cnic" name="cnic" type="text" value="" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
-                                <p class="py-2 text-sm text-gray-600">Enter The patient's CNIC or CRC.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Enter The patient's CNIC or CRC.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="dob">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="dob" name="dob" type="date" value="" required>
-                                <p class="py-2 text-sm text-gray-600">Select the Date of bith of the patient.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Select the Date of bith of the patient.</p> --}}
                             </div>
                         </div>
                         <div class="md:flex mb-6">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="name" name="name" type="text" value="" placeholder="Enter patient name" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient name.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient name.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="father_name">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="father_name" name="father_name" type="text" value="" placeholder="Enter father name" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's father name</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's father name</p> --}}
                             </div>
                         </div>
                         <div class="md:flex mb-6">
@@ -74,7 +74,7 @@
                                     <option value="Other">Other</option>
                                 </select>
 
-                                <p class="py-2 text-sm text-gray-600">Choose if patient's gender.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Choose if patient's gender.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="phone_no">
@@ -83,7 +83,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="phone_no" name="phone_no" type="text" value="" data-inputmask="'mask': '0399-9999999'"  placeholder="03XX-XXXXXXX" maxlength="12" required>
-                                <p class="py-2 text-sm text-gray-600">Enter The patient's Mobile number.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Enter The patient's Mobile number.</p> --}}
                             </div>
                         </div>
                         <div class="md:flex mb-6">
@@ -94,7 +94,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="address" name="address" type="text" value="" placeholder="Enter address" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's address</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's address</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="marital_status">
@@ -108,19 +108,19 @@
                                     <option value="Not Married">Not Married</option>
                                 </select>
 
-                                <p class="py-2 text-sm text-gray-600">Choose if patient is married or not.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Choose if patient is married or not.</p> --}}
                             </div>
                         </div>
 
                         <div class="md:flex mb-6" id="spouse-details">
-                            <div class="md:w-1/3">
+                            <div class="md:w-1/6">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="spouse_name">
                                     Spouse Name.
                                 </label>
                             </div>
-                            <div class="md:w-2/3">
+                            <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="spouse_name" name="spouse_name" type="text" value="" placeholder="Enter spouse name">
-                                <p class="py-2 text-sm text-gray-600">Write patient's spouse name if he/she is married</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's spouse name if he/she is married</p> --}}
                             </div>
                         </div>
 
@@ -132,7 +132,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="qualification" name="qualification" type="text" value="" placeholder="Enter qualification" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's qualification</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's qualification</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="type_of_disability">
@@ -141,7 +141,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="type_of_disability" name="type_of_disability" type="text" value="" placeholder="Enter type of disability" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's type of disability.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's type of disability.</p> --}}
                             </div>
                         </div>
                         <div class="md:flex mb-6">
@@ -152,7 +152,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="nature_of_disability" name="nature_of_disability" type="text" value="" placeholder="Enter nature of disability" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's nature of disability.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's nature of disability.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="cause_of_disability">
@@ -161,7 +161,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="cause_of_disability" name="cause_of_disability" type="text" value="" placeholder="Enter cause of disability" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's cause of disability.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's cause of disability.</p> --}}
                             </div>
                         </div>
                         <div class="md:flex mb-6">
@@ -172,7 +172,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="source_of_income" name="source_of_income" type="text" value="" placeholder="Enter source of income" required>
-                                <p class="py-2 text-sm text-gray-600">Write patient's source of income.</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write patient's source of income.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
                                 <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="type_of_job">
@@ -181,7 +181,7 @@
                             </div>
                             <div class="md:w-2/6">
                                 <input class="form-input block w-full focus:bg-white" id="type_of_job" name="type_of_job" type="text" value="" placeholder="Enter type of job" required>
-                                <p class="py-2 text-sm text-gray-600">Write type of job (that patient can do or is doing).</p>
+                                {{-- <p class="py-2 text-sm text-gray-600">Write type of job (that patient can do or is doing).</p> --}}
                             </div>
                         </div>
                         <div class="grid grid-cols-1 gap-2 place-items-end">
@@ -215,16 +215,3 @@
         </script>
     @endpush
 </x-app-layout>
-
-{{-- Text Area --}}
-{{-- <div class="md:flex mb-6">
-    <div class="md:w-1/6">
-        <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="my-textarea">
-            Text Area
-        </label>
-    </div>
-    <div class="md:w-2/6">
-        <textarea class="form-textarea block w-full focus:bg-white" id="my-textarea" value="" rows="8"></textarea>
-        <p class="py-2 text-sm text-gray-600">add notes about populating the field</p>
-    </div>
-</div> --}}
