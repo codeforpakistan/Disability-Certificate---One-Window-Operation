@@ -46,6 +46,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="overflow-hidden sm:rounded-lg mt-6 grid grid-cols-4 gap-2 place-items-center">
+                        @foreach($applicant->resources as $resource)
+                            <livewire:show-thumbnail :resource="$resource" />
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
