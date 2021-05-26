@@ -52,7 +52,7 @@ class AssessmentController extends Controller
             $applicant->status = 3;
             $applicant->save();
         }
-        return redirect()->route('dashboard', ['cnic' => $applicant->cnic])->with('success'. 'Clinical assessment submitted successfully.');
+        return redirect()->route('dashboard')->with('success'. 'Clinical assessment submitted successfully.');
     }
 
     /**

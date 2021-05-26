@@ -72,7 +72,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/3">
-                                <input class="form-input block w-full focus:bg-white" id="doctor_name" name="doctor_name" type="text" value="" required>
+                                <input class="form-input block w-full focus:bg-white" id="doctor_name" name="doctor_name" type="text" value="{{ old('doctor_name') }}" required>
                                 <p class="py-2 text-sm text-gray-600">The name of the doctor who is performing the assessment.</p>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/3">
-                                <textarea class="form-textarea block w-full focus:bg-white" id="clinical_findings" name="clinical_findings" id="my-textarea" value="" rows="8"></textarea>
+                                <textarea class="form-textarea block w-full focus:bg-white" id="clinical_findings" name="clinical_findings" id="my-textarea" rows="8" required>{{ old('clinical_findings') }}</textarea>
                                 <p class="py-2 text-sm text-gray-600">add notes about populating the field</p>
                             </div>
                         </div>
@@ -95,10 +95,10 @@
                             </div>
                             <div class="md:w-2/3">
                                 <span class="mr-12">
-                                    <input class="form-input focus:bg-white" id="fit_for_job" name="fit_for_job" type="radio" value="1" required> Yes
+                                    <input class="form-input focus:bg-white" id="fit_for_job" name="fit_for_job" type="radio" value="1" {{ (old("fit_for_job") == '1' ? "checked" : "") }} required> Yes
                                 </span>
                                 <span>
-                                    <input class="form-input focus:bg-white" id="fit_for_job" name="fit_for_job" type="radio" value="0" required> No
+                                    <input class="form-input focus:bg-white" id="fit_for_job" name="fit_for_job" type="radio" value="0" {{ (old("fit_for_job") == '0' ? "checked" : "") }} required> No
                                 </span>
                                 <p class="py-2 text-sm text-gray-600">Is the applicant fit for job?</p>
                             </div>
@@ -111,10 +111,10 @@
                             </div>
                             <div class="md:w-2/3">
                                 <span class="mr-12">
-                                    <input class="form-input focus:bg-white" id="fit_for_driving" name="fit_for_driving" type="radio" value="1" required> Yes
+                                    <input class="form-input focus:bg-white" id="fit_for_driving" name="fit_for_driving" type="radio" value="1" {{ (old("fit_for_driving") == '1' ? "checked" : "") }} required> Yes
                                 </span>
                                 <span>
-                                    <input class="form-input focus:bg-white" id="fit_for_driving" name="fit_for_driving" type="radio" value="0" required> No
+                                    <input class="form-input focus:bg-white" id="fit_for_driving" name="fit_for_driving" type="radio" value="0" {{ (old("fit_for_driving") == '0' ? "checked" : "") }} required> No
                                 </span>
                                 <p class="py-2 text-sm text-gray-600">Is the applicant fit for driving?</p>
                             </div>
