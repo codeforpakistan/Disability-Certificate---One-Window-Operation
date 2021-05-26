@@ -27,7 +27,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="cnic" name="cnic" type="text" value="" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
+                                <input class="form-input block w-full focus:bg-white" id="cnic" name="cnic" type="text" value="{{ old('cnic') }}" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Enter The patient's CNIC or CRC.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -36,7 +36,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="dob" name="dob" type="date" value="" required>
+                                <input class="form-input block w-full focus:bg-white" id="dob" name="dob" type="date" value="{{ old('dob') }}" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Select the Date of bith of the patient.</p> --}}
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="name" name="name" type="text" value="" placeholder="Enter patient name" required>
+                                <input class="form-input block w-full focus:bg-white" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Enter patient name" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient name.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -56,7 +56,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="father_name" name="father_name" type="text" value="" placeholder="Enter father name" required>
+                                <input class="form-input block w-full focus:bg-white" id="father_name" name="father_name" type="text" value="{{ old('father_name') }}" placeholder="Enter father name" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's father name</p> --}}
                             </div>
                         </div>
@@ -69,9 +69,9 @@
                             <div class="md:w-2/6">
                                 <select class="form-select block w-full focus:bg-white" id="gender" name="gender" required>
                                     <option value="">Select gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Male" {{ (old("gender") == 'Male' ? "selected" : "") }}>Male</option>
+                                    <option value="Female" {{ (old("gender") == 'Female' ? "selected" : "") }}>Female</option>
+                                    <option value="Other" {{ (old("gender") == 'Other' ? "selected" : "") }}>Other</option>
                                 </select>
 
                                 {{-- <p class="py-2 text-sm text-gray-600">Choose if patient's gender.</p> --}}
@@ -82,7 +82,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="phone_no" name="phone_no" type="text" value="" data-inputmask="'mask': '0399-9999999'"  placeholder="03XX-XXXXXXX" maxlength="12" required>
+                                <input class="form-input block w-full focus:bg-white" id="phone_no" name="phone_no" type="text" value="{{ old('phone_no') }}" data-inputmask="'mask': '0399-9999999'"  placeholder="03XX-XXXXXXX" maxlength="12" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Enter The patient's Mobile number.</p> --}}
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="address" name="address" type="text" value="" placeholder="Enter address" required>
+                                <input class="form-input block w-full focus:bg-white" id="address" name="address" type="text" value="{{ old('address') }}" placeholder="Enter address" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's address</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -104,8 +104,8 @@
                             <div class="md:w-2/6">
                                 <select class="form-select block w-full focus:bg-white" id="marital_status" name="marital_status" required>
                                     <option value="">Select marital status</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Not Married">Not Married</option>
+                                    <option value="Married" {{ (old("marital_status") == 'Married' ? "selected" : "") }}>Married</option>
+                                    <option value="Not Married" {{ (old("marital_status") == 'Not Married' ? "selected" : "") }}>Not Married</option>
                                 </select>
 
                                 {{-- <p class="py-2 text-sm text-gray-600">Choose if patient is married or not.</p> --}}
@@ -119,7 +119,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="spouse_name" name="spouse_name" type="text" value="" placeholder="Enter spouse name">
+                                <input class="form-input block w-full focus:bg-white" id="spouse_name" name="spouse_name" type="text" value="{{ old('spouse_name') }}" placeholder="Enter spouse name">
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's spouse name if he/she is married</p> --}}
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="qualification" name="qualification" type="text" value="" placeholder="Enter qualification" required>
+                                <input class="form-input block w-full focus:bg-white" id="qualification" name="qualification" type="text" value="{{ old('qualification') }}" placeholder="Enter qualification" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's qualification</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -140,7 +140,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="type_of_disability" name="type_of_disability" type="text" value="" placeholder="Enter type of disability" required>
+                                <input class="form-input block w-full focus:bg-white" id="type_of_disability" name="type_of_disability" type="text" value="{{ old('type_of_disability') }}" placeholder="Enter type of disability" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's type of disability.</p> --}}
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="nature_of_disability" name="nature_of_disability" type="text" value="" placeholder="Enter nature of disability" required>
+                                <input class="form-input block w-full focus:bg-white" id="nature_of_disability" name="nature_of_disability" type="text" value="{{ old('nature_of_disability') }}" placeholder="Enter nature of disability" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's nature of disability.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -160,7 +160,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="cause_of_disability" name="cause_of_disability" type="text" value="" placeholder="Enter cause of disability" required>
+                                <input class="form-input block w-full focus:bg-white" id="cause_of_disability" name="cause_of_disability" type="text" value="{{ old('cause_of_disability') }}" placeholder="Enter cause of disability" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's cause of disability.</p> --}}
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="source_of_income" name="source_of_income" type="text" value="" placeholder="Enter source of income" required>
+                                <input class="form-input block w-full focus:bg-white" id="source_of_income" name="source_of_income" type="text" value="{{ old('source_of_income') }}" placeholder="Enter source of income" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's source of income.</p> --}}
                             </div>
                             <div class="md:w-1/6 ml-2">
@@ -180,7 +180,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="type_of_job" name="type_of_job" type="text" value="" placeholder="Enter type of job" required>
+                                <input class="form-input block w-full focus:bg-white" id="type_of_job" name="type_of_job" type="text" value="{{ old('type_of_job') }}" placeholder="Enter type of job" required>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write type of job (that patient can do or is doing).</p> --}}
                             </div>
                         </div>
