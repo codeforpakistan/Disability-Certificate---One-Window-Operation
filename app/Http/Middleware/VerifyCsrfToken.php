@@ -14,4 +14,22 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if(!Auth::check() && $request->route()->named('logout')) {
+        
+            $this->except[] = route('logout');
+            
+        }
+        
+        return $next($request);
+    }
 }
