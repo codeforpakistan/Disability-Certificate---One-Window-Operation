@@ -14,7 +14,7 @@ class AddDoctorNameColumnToApplicantAssessmentsTable extends Migration
     public function up()
     {
         Schema::table('applicant_assesments', function (Blueprint $table) {
-            $table->string('doctor_name')->after('applicant_id');
+            $table->string('doctor_name')->nullable()->after('applicant_id');
         });
     }
 
