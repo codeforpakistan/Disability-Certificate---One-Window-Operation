@@ -1,12 +1,12 @@
 <footer class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
     <div class="bg-white">
     	<div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center">
-    		<div class="p-5 w-32"><img class="w-32" src="{{ asset('img/pak-logo.png') }}"></div>
-		    <div class="p-5 w-32"><img class="w-32" src="{{ asset('img/nih-logo.png') }}"></div>
-		    <div class="p-5 w-32"><img class="w-32" src="{{ asset('img/nirm-logo.jpeg') }}"></div>
-		    <div class="p-5 w-32"><img class="w-32" src="{{ asset('img/nadra-logo.png') }}"></div>
-		    <div class="p-5 w-32"><img class="w-32" src="{{ asset('img/tech-logo.png') }}"></div>
-		    <div class="p-5 w-28"><img class="w-28" src="{{ asset('img/cfp-logo.jpeg') }}"></div>
+    		<div class="p-5 w-32"><a href="#"><img class="w-32" src="{{ asset('img/pak-logo.png') }}"></a></div>
+		    <div class="p-5 w-32"><a href="#"><img class="w-32" src="{{ asset('img/nih-logo.png') }}"></a></div>
+		    <div class="p-5 w-32"><a href="#"><img class="w-32" src="{{ asset('img/nirm-logo.jpeg') }}"></a></div>
+		    <div class="p-5 w-32"><a href="#"><img class="w-32" src="{{ asset('img/nadra-logo.png') }}"></a></div>
+		    <div class="p-5 w-32"><a href="#"><img class="w-32" src="{{ asset('img/tech-logo.png') }}"></a></div>
+		    <div class="p-5 w-28"><a href="#"><img class="w-28" src="{{ asset('img/cfp-logo.jpeg') }}"></a></div>
 		</div>
 	</div>
 
