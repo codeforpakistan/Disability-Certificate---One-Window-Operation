@@ -60,7 +60,7 @@
                                             <img style="width: 120px;" src="{{ asset('img/pak-logo.png') }}" alt="">
                                         </td>
                                         <td style="width: 80%; border: 0px">
-                                            <p style="text-align: center;">NATIONAL COUNCIL FOR THE REHABILITATION OF DISABLED PERSONS</p>
+                                            <p style="text-align: center;">COUNCIL ON RIGHTS OF PERSONS WITH DISABILITIES</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -119,7 +119,7 @@
                     </tr>
                     <tr style="border: 0px;">
                         <td style="width: 50%; text-align: center;" colspan="2">
-                            <p style="text-align: left; padding: 5px;">9. Type of disability: <u class="uppercase">{{ $applicant->type_of_disability }}</u></p>
+                            <p style="text-align: left; padding: 5px;">9. Type of disability: <u class="uppercase">{{ $applicant->disabilityType->type }}</u></p>
                         </td>
                     </tr>
                     <tr style="border: 0px;">
@@ -139,7 +139,8 @@
                     </tr>
                     <tr>
                         <td style="width: 50%; text-align: center;" >
-                            <p style="text-align: center; padding: 5px;">
+                            {{-- <p><img src="{{ asset('img/signature-2.svg') }}" style="width: 180px;" alt=""></p> --}}
+                            <p style="text-align: center;">
                                 _________________________<br>
                                 RANA SAEED RAMZAN <br>
                                 Deputy Director <br>
@@ -147,7 +148,8 @@
                             </p>
                         </td>
                         <td style="width: 50%; text-align: center;">
-                            <p style="text-align: center; padding: 5px;">
+                            <p><img src="{{ asset('img/signature-2.svg') }}" style="width: 180px;" alt=""></p>
+                            <p style="text-align: center;">
                                 _________________________<br>
                                 DR. FARIDULLAH KHAN ZIMRI<br>
                                 Chairman <br>

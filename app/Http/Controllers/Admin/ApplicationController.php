@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
+use App\Models\DisabilityType;
 
 class ApplicationController extends Controller
 {
@@ -15,7 +16,10 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return view('admin.applicant.create-stage1');
+        $disabilityTypes = DisabilityType::pluck('type', 'id');
+        return view('admin.applicant.create-stage1', [
+            'disabilityTypes' => $disabilityTypes,
+        ]);
     }
 
     /**

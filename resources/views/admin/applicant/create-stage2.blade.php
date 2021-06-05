@@ -27,7 +27,7 @@
                                 <td class="px-6 py-4">{{ $applicant->cnic }}</td>
                                 <td class="px-6 py-4">{{ $applicant->name }}</td>
                                 <td class="px-6 py-4">{{ $applicant->father_name }}</td>
-                                <td class="px-6 py-4">{{ $applicant->type_of_disability }}</td>
+                                <td class="px-6 py-4">{{ $applicant->disabilityType->type }}</td>
                                 <td class="px-6 py-4">{{ $applicant->nature_of_disability }}</td>
                                 <td class="px-6 py-4">{{ $applicant->cause_of_disability }}</td>
                             </tr>

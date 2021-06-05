@@ -140,7 +140,12 @@
                                 </label>
                             </div>
                             <div class="md:w-2/6">
-                                <input class="form-input block w-full focus:bg-white" id="type_of_disability" name="type_of_disability" type="text" value="{{ old('type_of_disability') }}" placeholder="Enter type of disability" required>
+                                <select class="form-select block w-full focus:bg-white" id="type_of_disability" name="type_of_disability" required>
+                                    <option value="">Select type of disability</option>
+                                    @foreach($disabilityTypes as $id => $type)
+                                        <option value="{{ $id }}" {{ (old("type_of_disability") == $id ? "selected" : "") }}>{{ $type }}</option>
+                                    @endforeach
+                                </select>
                                 {{-- <p class="py-2 text-sm text-gray-600">Write patient's type of disability.</p> --}}
                             </div>
                         </div>

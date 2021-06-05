@@ -40,7 +40,7 @@
                         <tbody class="divide-y divide-gray-200">
                             <tr>
                                 <td class="px-6 py-4">{{ $applicant->gender }}</td>
-                                <td class="px-6 py-4">{{ $applicant->type_of_disability }}</td>
+                                <td class="px-6 py-4">{{ $applicant->disabilityType->type }}</td>
                                 <td class="px-6 py-4">{{ $applicant->nature_of_disability }}</td>
                                 <td class="px-6 py-4">{{ $applicant->cause_of_disability }}</td>
                             </tr>

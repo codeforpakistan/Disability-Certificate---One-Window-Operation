@@ -15,9 +15,9 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $applicants = collect([])->paginate(10);
+        $applicants = collect([])->paginate(50);
         if ($request->has('cnic')) {
-            $applicants = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->paginate(10);
+            $applicants = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->paginate(50);
         } else {
             if (\Auth::user()->role == 'Assessment') {
                 $applicants = Applicant::where('status', 2)
@@ -26,15 +26,15 @@ class DashboardController extends Controller
                     // })
                     ->orderBy("created_at", 'DESC')
                     // ->has('assessments', '=', 0)
-                    ->paginate(10);
+                    ->paginate(50);
             } else if (\Auth::user()->role == 'CRPD') {
                 $applicants = Applicant::where('status', 3)
                     ->orderBy("created_at", 'DESC')
-                    ->paginate(10);
+                    ->paginate(50);
             } else if (\Auth::user()->role == 'Help Desk') {
                 $applicants = Applicant::where('status', 1)
                     ->orderBy("created_at", 'DESC')
-                    ->paginate(10);
+                    ->paginate(50);
             }
         }
         return view('dashboard', [

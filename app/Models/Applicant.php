@@ -11,6 +11,7 @@ use App\Models\ApplicantAssesment;
 use App\Models\ApplicantVerification;
 use App\Models\Resource;
 use App\Models\Status;
+use App\Models\DisabilityType;
 
 class Applicant extends Model
 {
@@ -66,6 +67,14 @@ class Applicant extends Model
     public function applicationStatus()
     {
         return $this->belongsTo(Status::class, 'status', 'id');
+    }
+
+    /**
+     * Get the disability type for this applicant.
+     */
+    public function disabilityType()
+    {
+        return $this->belongsTo(DisabilityType::class, 'type_of_disability', 'id');
     }
 
     /**

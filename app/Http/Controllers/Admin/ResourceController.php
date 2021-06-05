@@ -34,7 +34,8 @@ class ResourceController extends Controller
                 'user_id' => \Auth::id(),
                 'applicant_id' => $request->applicant_id,
                 'type' => $file->getMimeType(),
-                'name' =>  pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                // 'name' =>  pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'name' =>  NULL,
                 'url' => env('APP_URL') . '/storage/' . $path,
             ];
             Resource::create($input);
