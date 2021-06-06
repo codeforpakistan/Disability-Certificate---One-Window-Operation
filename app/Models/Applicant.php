@@ -51,6 +51,7 @@ class Applicant extends Model
         'source_of_income',
         'type_of_job',
         'status',
+        'comments'
     ];
 
     /**

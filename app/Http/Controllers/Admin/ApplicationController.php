@@ -94,10 +94,12 @@ class ApplicationController extends Controller
     {
         if ($request->has('issue') && $request->issue == 'yes') {
             $applicant = Applicant::with('resources')->find($id);
+            $applicant->comments = $request->comments;
             $applicant->status = 5;
             $applicant->save();
         } else {
             $applicant = Applicant::with('resources')->find($id);
+            $applicant->comments = $request->comments;
             $applicant->status = 8;
             $applicant->save();
             return redirect()->route('dashboard', ['cnic' => $applicant->cnic])->with('success', 'Verification complete.');

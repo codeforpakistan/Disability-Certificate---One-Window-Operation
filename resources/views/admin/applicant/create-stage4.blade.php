@@ -84,9 +84,63 @@
                         @csrf
                         <div class="grid grid-cols-1 gap-2 place-items-end">
                             <div class="flex justify-center rounded-lg text-lg" role="group">
-                                <button type="submit" name="issue" value="yes" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-l-lg border-r-0 px-2 py-2 mx-0 outline-none focus:shadow-outline">Verify and Issue DC</button>
+                                <div x-data="{ 'verifyAndIssueDCModal': false }" @keydown.escape="verifyAndIssueDCModal = false">
+                                    <button type="button" name="issue" value="yes" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-l-lg border-r-0 px-2 py-2 mx-0 outline-none focus:shadow-outline" @click="verifyAndIssueDCModal = true">Verify and Issue DC</button>
+                                    <!-- Modal -->
+                                    <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-black bg-opacity-50" x-show="verifyAndIssueDCModal">
+                                        <!-- Modal inner -->
+                                        <div class="max-w-3xl px-6 py-4 mx-auto text-left bg-white rounded shadow-lg" @click.away="verifyAndIssueDCModal = false" x-transition:enter="motion-safe:ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100">
+                                            <!-- Title / Close-->
+                                            <div class="flex items-center justify-between">
+                                                <h5 class="mr-3 text-black max-w-none">Verify and Issue Disability Certificate</h5>
+                                                <button type="button" class="z-50 cursor-pointer" @click="verifyAndIssueDCModal = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <!-- content -->
+                                            <div>
+                                                <form method="POST" action="{{ route('admin.applications.issueCertificate', [$applicant->id]) }}" class="mt-10">
+                                                    @csrf
+                                                    <div class="md:flex mb-6">
+                                                        <textarea class="form-textarea block w-full focus:bg-white" id="comments" name="comments" placeholder="Add any comments here. if no comments add N/A" rows="8" required>{{ old('clinical_findings') }}</textarea>
+                                                    </div>
+                                                    <button type="submit" name="issue" value="yes" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Verify and Issue DC</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div x-data="{ 'verifyAndDonotIssueDC': false }" @keydown.escape="verifyAndDonotIssueDC = false">
+                                    <button type="button" name="issue" value="no" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-r-lg px-2 py-2 mx-0 outline-none focus:shadow-outline" @click="verifyAndDonotIssueDC = true">Verify and Don't issue DC</button>
+                                    <!-- Modal -->
+                                    <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-black bg-opacity-50" x-show="verifyAndDonotIssueDC">
+                                        <!-- Modal inner -->
+                                        <div class="max-w-3xl px-6 py-4 mx-auto text-left bg-white rounded shadow-lg" @click.away="verifyAndDonotIssueDC = false" x-transition:enter="motion-safe:ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100">
+                                            <!-- Title / Close-->
+                                            <div class="flex items-center justify-between">
+                                                <h5 class="mr-3 text-black max-w-none">Verify and Don't issue Disability Certificate</h5>
+                                                <button type="button" class="z-50 cursor-pointer" @click="verifyAndDonotIssueDC = false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <!-- content -->
+                                            <div>
+                                                <form method="POST" action="{{ route('admin.applications.issueCertificate', [$applicant->id]) }}" class="mt-10">
+                                                    @csrf
+                                                    <div class="md:flex mb-6">
+                                                        <textarea class="form-textarea block w-full focus:bg-white" id="comments" name="comments" placeholder="Add any comments here. if no comments add N/A" rows="8" required>{{ old('clinical_findings') }}</textarea>
+                                                    </div>
+                                                    <button type="submit" name="issue" value="no" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Verify and Don't issue DC</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 {{-- <a href="#" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 border-r-0 px-2 py-2 mx-0 outline-none focus:shadow-outline">Start Assessment</a> --}}
-                                <button type="submit" name="issue" value="no" class="bg-white text-green-700 hover:bg-green-700 hover:text-white border border-green-700 rounded-r-lg px-2 py-2 mx-0 outline-none focus:shadow-outline">Verify and Don't issue DC</button>
                             </div>
                         </div>
                     </form>
