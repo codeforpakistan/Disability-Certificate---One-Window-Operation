@@ -88,7 +88,7 @@
                                 </label>
                             </div>
                             <div class="md:w-2/3">
-                                <textarea class="form-textarea block w-full focus:bg-white" id="clinical_findings" name="clinical_findings" id="my-textarea" rows="8" required>{{ old('clinical_findings') }}</textarea>
+                                <textarea class="form-textarea block w-full focus:bg-white" id="clinical_findings" name="clinical_findings" rows="8" required>{{ old('clinical_findings') }}</textarea>
                                 <p class="py-2 text-sm text-gray-600">add notes about populating the field</p>
                             </div>
                         </div>
