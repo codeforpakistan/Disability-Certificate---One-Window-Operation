@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 @if (session('success'))
-                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)">
                         <p class="font-bold">Success!</p>
                         <p>{{ session('success') }}</p>
                     </div>
@@ -66,10 +66,10 @@
                     {{ $applicants->links() }}
                 </div>
                 @if($applicants->isEmpty())
-                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                    {{-- <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
                         <p class="font-bold">Yay!</p>
                         <p>Your workspace seems clear.</p>
-                    </div>
+                    </div> --}}
                 @endif
             </div>
         </div>
