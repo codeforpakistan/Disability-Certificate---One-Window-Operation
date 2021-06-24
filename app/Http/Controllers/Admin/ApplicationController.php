@@ -97,6 +97,12 @@ class ApplicationController extends Controller
             $applicant->comments = $request->comments;
             $applicant->status = 5;
             $applicant->save();
+        } else if($request->has('issue') && $request->issue == 'reassess'){
+            $applicant = Applicant::with('resources')->find($id);
+            $applicant->comments = $request->comments;
+            $applicant->status = 9;
+            $applicant->save();
+            return redirect()->route('dashboard', ['cnic' => $applicant->cnic])->with('success', 'Patient marked for reassessment.');
         } else {
             $applicant = Applicant::with('resources')->find($id);
             $applicant->comments = $request->comments;

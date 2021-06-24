@@ -1,72 +1,80 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="h4 font-weight-bold">
             {{ __('Patient Registration - Document uploads') }}
         </h2>
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-8">
-                <div class="py-8 mt-6 lg:mt-0 rounded shadow bg-white grid grid-cols-1 gap-2 place-items-center">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-5">
-                        {{ __('Patient Info') }}
-                    </h2>
-                    <table class="mx-auto max-w-6xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-                        <thead class="bg-gray-50">
-                            <tr class="text-gray-600 text-left">
-                                <th class="font-semibold text-sm uppercase px-6 py-4">CNIC / CRC</th>
-                                <th class="font-semibold text-sm uppercase px-6 py-4">Name</th>
-                                <th class="font-semibold text-sm uppercase px-6 py-4">Father Name</th>
-                                <th class="font-semibold text-sm uppercase px-6 py-4">Type of disability</th>
-                                <th class="font-semibold text-sm uppercase px-6 py-4">Nature of disability</th>
-                                <th class="font-semibold text-sm uppercase px-6 py-4">Cause of disability</th>
+
+    <div class="row justify-content-center my-5">
+        <div class="col-md-12">
+            <div class="card shadow bg-light">
+                <div class="card-heading bg-white px-5 py-3 border-bottom rounded-top">
+                    <h2>{{ __('Patient Info') }}</h2>
+                </div>
+                <div class="card-body bg-white px-5 py-3 border-bottom">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">CNIC / CRC</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Father Name</th>
+                                <th scope="col">Type of disability</th>
+                                <th scope="col">Nature of disability</th>
+                                <th scope="col">Cause of disability</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody>
                             <tr>
-                                <td class="px-6 py-4">{{ $applicant->cnic }}</td>
-                                <td class="px-6 py-4">{{ $applicant->name }}</td>
-                                <td class="px-6 py-4">{{ $applicant->father_name }}</td>
-                                <td class="px-6 py-4">{{ $applicant->disabilityType->type }}</td>
-                                <td class="px-6 py-4">{{ $applicant->nature_of_disability }}</td>
-                                <td class="px-6 py-4">{{ $applicant->cause_of_disability }}</td>
+                                <td>{{ $applicant->cnic }}</td>
+                                <td>{{ $applicant->name }}</td>
+                                <td>{{ $applicant->father_name }}</td>
+                                <td>{{ $applicant->disabilityType->type }}</td>
+                                <td>{{ $applicant->nature_of_disability }}</td>
+                                <td>{{ $applicant->cause_of_disability }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div id='stage2' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white grid grid-cols-1 gap-2 place-items-center">
+        </div>
+        <div class="col-md-12 mt-5">
+            <div class="card shadow bg-light">
+                <div class="card-body bg-white px-5 py-3 border-bottom">
                     @if ($errors->any())
-                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-                            <p class="font-bold">Error!</p>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading">Error!</h4>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <br>
                     @endif
                     <form method="POST" action="{{ route('admin.resources.store') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="applicant_id" value="{{ request()->input('applicant_id') }}">
-                        <input class="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" type="file" name="applicant_files[]" id="applicant_files" multiple required/>
-                        <button class="px-8 rounded-r-lg bg-green-700  text-white font-bold p-4 uppercase border-green-900 border-t border-b border-r">Upload Document</button>
+                        <div class="form-row align-items-center">
+                            <div class="col-3 offset-3">
+                                <input type="file" class="form-control-file" name="applicant_files[]" id="applicant_files" multiple required>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-success pull-right">Upload Document</button>
+                            </div>
+                        </div>
                     </form>
-                </div>
-            </div>
-            <div class="overflow-hidden sm:rounded-lg mt-6 grid grid-cols-4 gap-2 place-items-center">
-                @foreach($resources as $resource)
-                    <livewire:show-thumbnail :resource="$resource" />
-                @endforeach
-            </div>
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mt-6">
-                <div class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                    <div class="row mt-5">
+                         @foreach($resources as $resource)
+                            <div class="col-md-2">
+                                <livewire:show-thumbnail :resource="$resource" />
+                            </div>
+                        @endforeach
+                    </div>
                     <form method="POST" action="{{ route('admin.applications.update', [$applicant->id]) }}">
                         @method("PUT")
                         <input type="hidden" name="status" value="2">
                         @csrf
                         <div class="grid grid-cols-1 gap-2 place-items-end">
-                            <button class="shadow bg-yellow-700 hover:bg-yellow-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                            <button class="btn btn-success pull-right" type="submit">
                                 Submit for clinical assessment
                             </button>
                         </div>

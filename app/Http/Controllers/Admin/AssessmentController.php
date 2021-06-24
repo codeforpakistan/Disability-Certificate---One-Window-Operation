@@ -48,7 +48,7 @@ class AssessmentController extends Controller
         $applicantAssessment = ApplicantAssesment::create($validatedData);
         $applicant = Applicant::with('resources')->find($request->applicant_id);
 
-        if($applicant->assessments->count() == 5) {
+        if(($applicant->status == 2 && $applicant->assessments->count() == 5) || ($applicant->status == 9 && $applicant->assessments->count() == 10)) {
             $applicant->status = 3;
             $applicant->save();
         }

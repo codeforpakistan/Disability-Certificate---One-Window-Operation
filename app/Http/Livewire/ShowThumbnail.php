@@ -6,15 +6,15 @@ use Livewire\Component;
 
 class ShowThumbnail extends Component
 {
-	public $resource;
-	public $name;
+    public $resource;
+    public $name;
 
-	public function setName()
-	{
-		$this->resource->name = $this->name;
-		$this->resource->save();
-	}
-
+    public function setName()
+    {
+        $this->resource->name = $this->name;
+        $this->resource->save();
+    }
+    
     public function render()
     {
         return view('livewire.show-thumbnail');
