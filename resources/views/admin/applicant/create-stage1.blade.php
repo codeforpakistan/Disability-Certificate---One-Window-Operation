@@ -112,7 +112,7 @@
                                 <input class="form-control" id="type_of_job" name="type_of_job" type="text" placeholder="Enter type of job" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success pull-right">Save and proceed to documents upload</button>
+                        <button type="submit" class="btn btn-outline-success pull-right">Save and proceed to documents upload</button>
                     </form>
                 </div>
             </div>

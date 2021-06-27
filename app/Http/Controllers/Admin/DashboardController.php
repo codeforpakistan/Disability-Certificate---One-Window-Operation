@@ -15,11 +15,11 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $applicants = [];
+        $applicants = collect([])->paginate(50);
         if ($request->has('cnic')) {
             $applicants = Applicant::with('resources')->where('cnic', $request->cnic)->orderBy("created_at", 'DESC')->cursorPaginate(50);
         } else {
-            if (\Auth::user()->role == 'Assessment') {
+            if (\Auth::user()->hasRole('Assessment')) {
                 $applicants = Applicant::whereIn('status', [2,9])
                     // ->whereHas('assessments', function($q) {
                     //     $q->where('user_id', \Auth::id());
@@ -27,11 +27,11 @@ class DashboardController extends Controller
                     ->orderBy("created_at", 'DESC')
                     // ->has('assessments', '=', 0)
                     ->cursorPaginate(50);
-            } else if (\Auth::user()->role == 'CRPD') {
+            } else if (\Auth::user()->hasRole('CRPD')) {
                 $applicants = Applicant::where('status', 3)
                     ->orderBy("created_at", 'DESC')
                     ->cursorPaginate(50);
-            } else if (\Auth::user()->role == 'Help Desk') {
+            } else if (\Auth::user()->hasRole('Help Desk')) {
                 $applicants = Applicant::where('status', 1)
                     ->orderBy("created_at", 'DESC')
                     ->cursorPaginate(50);

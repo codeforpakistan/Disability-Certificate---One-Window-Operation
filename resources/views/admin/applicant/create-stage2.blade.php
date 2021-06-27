@@ -58,7 +58,7 @@
                                 <input type="file" class="form-control-file" name="applicant_files[]" id="applicant_files" multiple required>
                             </div>
                             <div class="col-3">
-                                <button class="btn btn-success pull-right">Upload Document</button>
+                                <button class="btn btn-outline-success pull-right">Upload Document</button>
                             </div>
                         </div>
                     </form>
@@ -74,7 +74,7 @@
                         <input type="hidden" name="status" value="2">
                         @csrf
                         <div class="grid grid-cols-1 gap-2 place-items-end">
-                            <button class="btn btn-success pull-right" type="submit">
+                            <button class="btn btn-outline-success pull-right" type="submit">
                                 Submit for clinical assessment
                             </button>
                         </div>
