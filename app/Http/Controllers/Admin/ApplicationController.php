@@ -78,7 +78,7 @@ class ApplicationController extends Controller
      */
     public function verification(Request $request, $id)
     {
-        $applicant = Applicant::with('resources')->find($id);
+        $applicant = Applicant::with(['resources', 'assessments.user'])->find($id);
         return view('admin.applicant.create-stage4', [
             'applicant' => $applicant,
         ]);

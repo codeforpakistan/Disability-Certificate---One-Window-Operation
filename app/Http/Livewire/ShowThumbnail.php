@@ -8,6 +8,7 @@ class ShowThumbnail extends Component
 {
     public $resource;
     public $name;
+    public $imageSize;
 
     public function setName()
     {

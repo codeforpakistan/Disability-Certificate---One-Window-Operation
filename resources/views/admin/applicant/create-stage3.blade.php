@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Patient Clinical Assessment') }}
+            {{ __('Applicant Clinical Assessment') }}
         </h2>
     </x-slot>
 
@@ -9,43 +9,53 @@
         <div class="col-md-12">
             <div class="card shadow bg-light">
                 <div class="card-heading bg-white px-5 py-3 border-bottom rounded-top">
-                    <h2>{{ __('Patient Info') }}</h2>
+                    <h2>{{ __('Applicant\'s Info') }}</h2>
                 </div>
                 <div class="card-body bg-white px-5 py-3 border-bottom">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">CNIC / CRC</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Father Name</th>
-                                <th scope="col">Type of disability</th>
-                                <th scope="col">Nature of disability</th>
-                                <th scope="col">Cause of disability</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $applicant->cnic }}</td>
-                                <td>{{ $applicant->name }}</td>
-                                <td>{{ $applicant->father_name }}</td>
-                                <td>{{ $applicant->disabilityType->type }}</td>
-                                <td>{{ $applicant->nature_of_disability }}</td>
-                                <td>{{ $applicant->cause_of_disability }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">CNIC / CRC</th>
+                                    <th scope="col">Applicant Name</th>
+                                    <th scope="col">Father Name</th>
+                                    <th scope="col">Type of disability</th>
+                                    <th scope="col">Nature of disability</th>
+                                    <th scope="col">Cause of disability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $applicant->cnic }}</td>
+                                    <td>{{ $applicant->name }}</td>
+                                    <td>{{ $applicant->father_name }}</td>
+                                    <td>{{ $applicant->disabilityType->type }}</td>
+                                    <td>{{ $applicant->nature_of_disability }}</td>
+                                    <td>{{ $applicant->cause_of_disability }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-5">
+            <div class="card shadow bg-light">
+                <div class="card-heading bg-white px-5 py-3 border-bottom rounded-top">
+                    <h2>{{ __('Applicant\'s Documents') }}</h2>
+                </div>
+                <div class="card-body bg-white px-5 py-3 border-bottom">
                     <div class="row mt-5">
                          @foreach($applicant->resources as $resource)
-                            <div class="col-md-2">
-                                <livewire:show-thumbnail :resource="$resource" />
+                            <div class="col-md-3">
+                                <livewire:show-thumbnail :resource="$resource" :imageSize="120" />
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-5">
+        <div class="col-md-6 mt-5">
             <div class="card shadow bg-light">
                 <div class="card-heading bg-white px-5 py-3 border-bottom rounded-top">
                     <h2>{{ __("Doctor's Assessment") }}</h2>

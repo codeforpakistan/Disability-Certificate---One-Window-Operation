@@ -15,6 +15,7 @@
         "alpinejs": "^2.7.3",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
+        "datatables.net-bs4": "^3.2.2",
         "jquery": "^3.5.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",

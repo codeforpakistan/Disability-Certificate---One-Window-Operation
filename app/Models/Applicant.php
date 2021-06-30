@@ -99,6 +99,6 @@ class Applicant extends Model
      */
     public function verification()
     {
-        return $this->hasOne(ApplicantVerification::class, 'applicant_id', 'id');
+        return $this->hasMany(ApplicantVerification::class, 'applicant_id', 'id');
     }
 }

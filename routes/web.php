@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::get('/dashboard', "Admin\DashboardController@index")->name('dashboard');
+    Route::get('/check-applicant-status', "Admin\DashboardController@checkApplicantStatus")->name('check.applicant.status');
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::resource('applications', 'ApplicationController', ['only' => ['index', 'store', 'create', 'update']]);    

@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="row justify-content-center my-5">
+    <div class="row my-5">
         <div class="col-md-12">
-            <livewire:search-applicant />
+            {{-- <livewire:search-applicant /> --}}
             <div class="card shadow bg-light">
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     @if (session('success'))
@@ -26,7 +26,7 @@
                             </button>
                         </div>
                     @endif
-                    <table class="table table-borderless">
+                    <table class="table table-borderless" id="applicants_datatable" data-order='[[ 1, "asc" ]]' data-page-length='25'>
                         <thead>
                             <tr>
                                 <th scope="col">CNIC / CRC</th>
@@ -38,7 +38,7 @@
                         <tbody>
                             @foreach($applicants as $applicant)
                                 <tr>
-                                    <th scope="row" class="align-middle">{{ $applicant->cnic }}</th>
+                                    <td scope="row" class="align-middle">{{ $applicant->cnic }}</td>
                                     <td class="align-middle">{{ $applicant->name }}</td>
                                     <td class="align-middle">
                                         @php
@@ -71,7 +71,18 @@
             </div>
         </div>
     </div>
-    <nav class="">
-        {{ $applicants->links() }}
-    </nav>
+    @push('scripts')
+        <script>
+            $(document).ready( function () {
+                $('#applicants_datatable').DataTable({
+                    "dom": "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                           "<'row'<'col-sm-12'tr>>" +
+                           "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                });
+
+                $('#applicants_datatable_paginate').addClass('pull-right');
+                $('#applicants_datatable_wrapper').removeClass('form-inline');
+            } );
+        </script>
+    @endpush
 </x-app-layout>

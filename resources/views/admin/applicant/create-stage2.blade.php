@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Patient Registration - Document uploads') }}
+            {{ __('Applicant Registration - Document uploads') }}
         </h2>
     </x-slot>
 
@@ -9,14 +9,14 @@
         <div class="col-md-12">
             <div class="card shadow bg-light">
                 <div class="card-heading bg-white px-5 py-3 border-bottom rounded-top">
-                    <h2>{{ __('Patient Info') }}</h2>
+                    <h2>{{ __('Applicant Info') }}</h2>
                 </div>
                 <div class="card-body bg-white px-5 py-3 border-bottom">
                     <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th scope="col">CNIC / CRC</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Applicant Name</th>
                                 <th scope="col">Father Name</th>
                                 <th scope="col">Type of disability</th>
                                 <th scope="col">Nature of disability</th>

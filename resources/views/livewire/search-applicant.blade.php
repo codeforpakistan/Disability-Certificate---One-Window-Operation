@@ -4,7 +4,7 @@
             <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Search by CNIC / CRC" value="{{ request()->has('cnic') ? request()->input('cnic'): "" }}" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
             @if(request()->has('cnic'))
                 <div class="input-group-append">
-                    <span class="input-group-text" style="background-color: white !important;"><a href="{{ route('dashboard') }}">Reset</a></span>
+                    <span class="input-group-text" style="background-color: white !important;"><a href="{{ route('check.applicant.status') }}">Reset</a></span>
                 </div>
             @endif
             <div class="input-group-append">
@@ -14,7 +14,6 @@
     </div>
 </form>
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
         $(":input").inputmask();

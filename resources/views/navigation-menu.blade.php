@@ -15,9 +15,12 @@
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
                 @if(auth()->user()->hasRole(['Help Desk']))
-                <x-jet-nav-link href="{{ route('admin.applications.index') }}" :active="request()->routeIs('admin.applications.index')">
-                    {{ __('Start a new Application') }}
-                </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('admin.applications.index') }}" :active="request()->routeIs('admin.applications.index')">
+                        {{ __('Start a new Application') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('check.applicant.status') }}" :active="request()->routeIs('check.applicant.status')">
+                        {{ __('Check Applicant Status') }}
+                    </x-jet-nav-link>
                 @endif
             </ul>
 
