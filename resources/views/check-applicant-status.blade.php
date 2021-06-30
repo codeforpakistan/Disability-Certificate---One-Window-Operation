@@ -15,20 +15,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col">CNIC / CRC</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Applicant Name</th>
+                                    <th scope="col">Father Name</th>
+                                    <th scope="col">Type of disability</th>
+                                    <th scope="col">Nature of disability</th>
+                                    <th scope="col">Cause of disability</th>
                                     <th scope="col">Current Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($applicants as $applicant)
                                     <tr>
-                                        <td scope="row" class="align-middle">{{ $applicant->cnic }}</td>
-                                        <td class="align-middle">{{ $applicant->name }}</td>
+                                        <td>{{ $applicant->cnic }}</td>
+                                        <td>{{ $applicant->name }}</td>
+                                        <td>{{ $applicant->father_name }}</td>
+                                        <td>{{ $applicant->disabilityType->type }}</td>
+                                        <td>{{ $applicant->nature_of_disability }}</td>
+                                        <td>{{ $applicant->cause_of_disability }}</td>
                                         <td class="align-middle">{{ $applicant->applicationStatus->title }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="align-middle text-center" colspan="3"><span class="lead text-muted">Applicant not registered.</span></td>
+                                        <td class="align-middle text-center" colspan="7"><span class="lead text-muted">Applicant not registered.</span></td>
                                     </tr>
                                 @endforelse
                             </tbody>
