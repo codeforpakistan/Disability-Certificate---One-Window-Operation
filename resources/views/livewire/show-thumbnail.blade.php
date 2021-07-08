@@ -29,6 +29,6 @@
                 </svg> <span style="font-size: 12px;">{{ $resource->created_at->diffForHumans() }}</span>
             </p>
         @endif
-        <a href="{{ $resource->url }}" class="btn btn-primary" target="_blank">View{{ !$imageSize ?? ' / Download' }}</a>
+        <a href="{{ $resource->url }}" class="btn btn-primary" target="_blank">View{{ !$imageSize ? ' / Download' : "" }}</a>
     </div>
 </div>

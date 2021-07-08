@@ -14,7 +14,7 @@
                     {{ __('Please confirm access to your account by entering one of your emergency recovery codes.') }}
                 </div>
 
-                <x-jet-validation-errors class="mb-3" />
+                {{-- <x-jet-validation-errors class="mb-3" /> --}}
 
                 <form method="POST" action="{{ route('two-factor.login') }}">
                     @csrf

@@ -11,14 +11,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                <x-jet-nav-link href="{{ Auth::user()->hasRole('Admin') ? route('admin.dashboard') : route('client.dashboard') }}" :active="request()->routeIs('client.dashboard')">
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
                 @if(auth()->user()->hasRole(['Help Desk']))
-                    <x-jet-nav-link href="{{ route('admin.applications.index') }}" :active="request()->routeIs('admin.applications.index')">
+                    <x-jet-nav-link href="{{ route('client.applications.index') }}" :active="request()->routeIs('client.applications.index')">
                         {{ __('Start a new Application') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('check.applicant.status') }}" :active="request()->routeIs('check.applicant.status')">
+                    <x-jet-nav-link href="{{ route('client.check.applicant.status') }}" :active="request()->routeIs('client.check.applicant.status')">
                         {{ __('Check Applicant Status') }}
                     </x-jet-nav-link>
                 @endif

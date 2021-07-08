@@ -4,7 +4,7 @@
             <x-jet-authentication-card-logo />
         </x-slot>
 
-        <x-jet-validation-errors class="mb-3" />
+        {{-- <x-jet-validation-errors class="mb-3" /> --}}
 
         <div class="card-body">
             <form method="POST" action="{{ route('register') }}">

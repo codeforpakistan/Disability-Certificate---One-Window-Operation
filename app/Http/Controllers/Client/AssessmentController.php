@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class AssessmentController extends Controller
             $applicant->status = 3;
             $applicant->save();
         }
-        return redirect()->route('dashboard')->with('success'. 'Clinical assessment submitted successfully.');
+        return redirect()->route('client.dashboard')->with('success'. 'Clinical assessment submitted successfully.');
     }
 
     /**

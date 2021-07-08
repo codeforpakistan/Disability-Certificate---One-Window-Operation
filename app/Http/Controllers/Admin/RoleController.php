@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Admin\ApplicationsDataTable;
-use App\Models\Applicant;
+use Illuminate\Http\Request;
+use App\DataTables\Admin\RolesDataTable;
 
-class ApplicationController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ApplicationsDataTable $dataTable)
+    public function index(RolesDataTable $dataTable)
     {
-        return $dataTable->render('admin.applications.index');
+        return $dataTable->render('admin.roles.index');
     }
 
     /**
@@ -48,7 +47,7 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        return view('admin.applications.show', ['applicant' => Applicant::with(['assessments.user'])->findOrFail($id)]);
+        //
     }
 
     /**

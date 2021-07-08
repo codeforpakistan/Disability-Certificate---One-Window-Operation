@@ -71,7 +71,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('admin.assessments.store') }}">
+                    <form method="POST" action="{{ route('client.assessments.store') }}">
                         @csrf
                         <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
                         <div class="form-row">

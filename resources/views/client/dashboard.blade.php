@@ -54,13 +54,13 @@
                                     </td>
                                     <td class="float-right align-middle">
                                         @if(\Auth::user()->hasRole('Help Desk'))
-                                            <a href="{{ route('admin.applications.create', ['applicant_id' => $applicant->id]) }}" type="button" class="btn btn-outline-success">Upload Documents</a>
+                                            <a href="{{ route('client.applications.create', ['applicant_id' => $applicant->id]) }}" type="button" class="btn btn-outline-success">Upload Documents</a>
                                         @endif
                                         @if(\Auth::user()->hasRole('Assessment') && (($applicant->status == 2 && $assessment == 0) || $applicant->status == 9 && $assessment == 1) )
-                                            <a href="{{ route("admin.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
+                                            <a href="{{ route("client.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
                                         @endif
                                         @if(\Auth::user()->hasRole('CRPD') && $applicant->status == 3 )
-                                            <a href="{{ route("admin.applications.verification", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Verification</a>
+                                            <a href="{{ route("client.applications.verification", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Verification</a>
                                         @endif
                                     </td>
                                 </tr>

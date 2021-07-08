@@ -50,7 +50,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('admin.resources.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('client.resources.store') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="applicant_id" value="{{ request()->input('applicant_id') }}">
                         <div class="form-row align-items-center">
@@ -69,7 +69,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <form method="POST" action="{{ route('admin.applications.update', [$applicant->id]) }}">
+                    <form method="POST" action="{{ route('client.applications.update', [$applicant->id]) }}">
                         @method("PUT")
                         <input type="hidden" name="status" value="2">
                         @csrf

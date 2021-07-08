@@ -89,10 +89,10 @@
                         <div class="col-md-12">
                             <div class="btn-group pull-right" role="group">
                                 @if( $applicant->assessments()->count() < 10 )
-                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#verificationModal" data-title="Reassessment" data-url="{{ route('admin.applications.issueCertificate', [$applicant->id]) }}" data-value="reassess" data-blank="0">Reassessment</button>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#verificationModal" data-title="Reassessment" data-url="{{ route('client.applications.issueCertificate', [$applicant->id]) }}" data-value="reassess" data-blank="0">Reassessment</button>
                                 @endif
-                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#verificationModal" data-title="Verify and don't issue DC" data-url="{{ route('admin.applications.issueCertificate', [$applicant->id]) }}" data-value="no" data-blank="0">Verify and don't issue DC</button>
-                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#verificationModal" data-title="Verify and issue DC" data-url="{{ route('admin.applications.issueCertificate', [$applicant->id]) }}" data-value="yes" data-blank="1">Verify and issue DC</button>
+                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#verificationModal" data-title="Verify and don't issue DC" data-url="{{ route('client.applications.issueCertificate', [$applicant->id]) }}" data-value="no" data-blank="0">Verify and don't issue DC</button>
+                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#verificationModal" data-title="Verify and issue DC" data-url="{{ route('client.applications.issueCertificate', [$applicant->id]) }}" data-value="yes" data-blank="1">Verify and issue DC</button>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
             function reDir() {
                 setTimeout(function () {
                     window.onbeforeunload = null;
-                    window.location.href = '{!! route('dashboard', ['cnic' => $applicant->cnic, 'issue' => 'yes']) !!}';
+                    window.location.href = '{!! route('client.dashboard', ['cnic' => $applicant->cnic, 'issue' => 'yes']) !!}';
                 }, 10);
             }
         </script>

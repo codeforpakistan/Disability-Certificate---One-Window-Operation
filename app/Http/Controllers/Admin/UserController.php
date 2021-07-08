@@ -2,31 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Admin\ApplicationsDataTable;
-use App\Models\Applicant;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use App\DataTables\Admin\UsersDataTable;
+use Spatie\Permission\Models\Role;
+use App\Models\User;
 
-class ApplicationController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ApplicationsDataTable $dataTable)
+    public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('admin.applications.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $dataTable->render('admin.users.index', [
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -37,7 +32,24 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', new Password, 'confirmed'],
+            'role' => 'exists:Spatie\Permission\Models\Role,id'
+        ]);
+        
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'email_verified_at' => now(),
+        ]);
+
+        $role = Role::find($validatedData['role']);
+        $user->assignRole($role);
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -48,7 +60,7 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        return view('admin.applications.show', ['applicant' => Applicant::with(['assessments.user'])->findOrFail($id)]);
+        //
     }
 
     /**

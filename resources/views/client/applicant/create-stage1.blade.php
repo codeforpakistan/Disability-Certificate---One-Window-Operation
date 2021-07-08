@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('admin.applications.store') }}" wire:submit.prevent="submit">
+                    <form method="POST" action="{{ route('client.applications.store') }}" wire:submit.prevent="submit">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">

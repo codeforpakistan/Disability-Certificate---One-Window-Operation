@@ -17,7 +17,8 @@
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.0",
         "spatie/laravel-activitylog": "^3.17",
-        "spatie/laravel-permission": "^4.2"
+        "spatie/laravel-permission": "^4.2",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

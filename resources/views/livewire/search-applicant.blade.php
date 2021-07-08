@@ -4,7 +4,7 @@
             <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Search by CNIC / CRC" value="{{ request()->has('cnic') ? request()->input('cnic'): "" }}" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
             @if(request()->has('cnic'))
                 <div class="input-group-append">
-                    <span class="input-group-text" style="background-color: white !important;"><a href="{{ route('check.applicant.status') }}">Reset</a></span>
+                    <span class="input-group-text" style="background-color: white !important;"><a href="{{ route('client.check.applicant.status') }}">Reset</a></span>
                 </div>
             @endif
             <div class="input-group-append">
