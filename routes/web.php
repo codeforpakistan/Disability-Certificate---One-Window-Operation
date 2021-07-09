@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['role:Admin'])->group(function () {
         Route::get('dashboard', "DashboardController@index")->name('dashboard');
         Route::resource('applications', "ApplicationController");
+        Route::resource('disability-types', "DisabilityTypeController");
         Route::resource('statuses', "StatusController");
         Route::resource('users', "UserController");
         Route::resource('roles', "RoleController");

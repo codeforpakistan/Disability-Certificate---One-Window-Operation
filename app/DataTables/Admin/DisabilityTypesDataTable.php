@@ -2,14 +2,14 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\User;
+use App\Models\DisabilityType;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class DisabilityTypesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,23 +20,25 @@ class UsersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query->where('id', '!=', \Auth::id())->with(['roles']))
-            ->addColumn('action', 'admin.users.actions')
-            ->addColumn('roles_names', function($row){
-                $roles = $row->roles->pluck('name')->toArray();
-                $roles = implode(',', $roles);
-                return $roles;
+            ->eloquent($query)
+            ->addColumn('action', 'admin.disability-types.actions')
+            ->addColumn('eligible_for_special_cnic', function($row){
+                if($row->eligible_for_scnic == 1) {
+                    return '<span class="badge bg-green">Yes</span>';
+                } else {
+                    return '<span class="badge bg-red">No</span>';
+                }
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'eligible_for_special_cnic']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\DisabilityType $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(DisabilityType $model)
     {
         return $model->newQuery();
     }
@@ -69,15 +71,14 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('User Id'),
-            Column::make('name')->title('User Name'),
-            Column::make('email')->title('Email'),
-            Column::make('roles_names')->title('Roles'),
-            // Column::computed('action')->title('Actions')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->addClass('text-center')
-            //     ->width(90),
+            Column::make('id')->title('Id'),
+            Column::make('type')->title('Disability'),
+            Column::make('eligible_for_special_cnic')->title('Eligible for Special CNIC'),
+            Column::computed('action')->title('Actions')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->width(90),
         ];
     }
 
@@ -88,6 +89,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'DisabilityTypes_' . date('YmdHis');
     }
 }
