@@ -2,14 +2,14 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\User;
+use App\Models\Status;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class StatusDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,23 +20,18 @@ class UsersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query->where('id', '!=', \Auth::id())->with(['roles']))
-            ->addColumn('action', 'admin.users.actions')
-            ->addColumn('roles_names', function($row){
-                $roles = $row->roles->pluck('name')->toArray();
-                $roles = implode(',', $roles);
-                return $roles;
-            })
-            ->rawColumns(['action']);       
+            ->eloquent($query)
+            ->addColumn('action', 'admin.statuses.actions')
+            ->rawColumns(['action']);    
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Status $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Status $model)
     {
         return $model->newQuery();
     }
@@ -70,9 +65,7 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('id')->title('User Id'),
-            Column::make('name')->title('User Name'),
-            Column::make('email')->title('Email'),
-            Column::make('roles_names')->title('Roles'),
+            Column::make('title')->title('Title'),
             // Column::computed('action')->title('Actions')
             //     ->exportable(false)
             //     ->printable(false)
@@ -88,6 +81,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Status_' . date('YmdHis');
     }
 }
