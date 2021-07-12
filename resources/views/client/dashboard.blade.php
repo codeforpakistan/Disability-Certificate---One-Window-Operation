@@ -44,9 +44,9 @@
                                         @php
                                             $assessment = $applicant->assessments()->where('user_id', \Auth::id())->count()
                                         @endphp
-                                        @if(\Auth::user()->hasRole('Assessment') && $applicant->status == 2 && $assessment == 1)
+                                        @if(\Auth::user()->hasRole('Assessment') && $applicant->applicationStatus->title == 'Documents Uploaded' && $assessment == 1)
                                             Assessment In progress
-                                        @elseif(\Auth::user()->hasRole('Assessment') && $applicant->status == 9 && $assessment == 2)
+                                        @elseif(\Auth::user()->hasRole('Assessment') && $applicant->applicationStatus->title == 'Reassessment' && $assessment == 2)
                                             Reassessment in progress
                                         @else
                                             {{ $applicant->applicationStatus->title }}
@@ -56,10 +56,10 @@
                                         @if(\Auth::user()->hasRole('Help Desk'))
                                             <a href="{{ route('client.applications.create', ['applicant_id' => $applicant->id]) }}" type="button" class="btn btn-outline-success">Upload Documents</a>
                                         @endif
-                                        @if(\Auth::user()->hasRole('Assessment') && (($applicant->status == 2 && $assessment == 0) || $applicant->status == 9 && $assessment == 1) )
+                                        @if(\Auth::user()->hasRole('Assessment') && (($applicant->applicationStatus->title == 'Documents Uploaded' && $assessment == 0) || $applicant->applicationStatus->title == 'Reassessment' && $assessment == 1) )
                                             <a href="{{ route("client.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
                                         @endif
-                                        @if(\Auth::user()->hasRole('CRPD') && $applicant->status == 3 )
+                                        @if(\Auth::user()->hasRole('CRPD') && $applicant->applicationStatus->title == "Assessed" )
                                             <a href="{{ route("client.applications.verification", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Verification</a>
                                         @endif
                                     </td>

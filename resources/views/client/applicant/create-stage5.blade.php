@@ -72,7 +72,7 @@
                             <p style="text-align: left; padding: 5px; padding: 20px">Date: <u class="uppercase">{{ date('d/m/Y') }}</u></p>
                         </td>
                         <td style="width: 50%; text-align: right;">
-                            <p style="text-align: right; padding: 20px">Reg# {{ $applicant->id . '/' . date('Y') . "-CRPD" }}</p>
+                            <p style="text-align: right; padding: 20px">Reg# {{ $applicant->registration_no }}</p>
                         </td>
                     </tr>
                     <tr style="border: 0px;">

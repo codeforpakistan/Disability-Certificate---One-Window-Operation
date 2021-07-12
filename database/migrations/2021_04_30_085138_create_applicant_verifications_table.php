@@ -14,9 +14,9 @@ class CreateApplicantVerificationsTable extends Migration
     public function up()
     {
         Schema::create('applicant_verifications', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('applicant_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('applicant_id');
             $table->boolean('is_verified');
             $table->boolean('is_certificate_issued');
             $table->timestamps();

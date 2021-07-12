@@ -14,8 +14,8 @@ class CreateApplicantsTable extends Migration
     public function up()
     {
         Schema::create('applicants', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->string('cnic')->unique();
             $table->date('dob')->nullable();
             $table->string('name')->nullable();
@@ -26,7 +26,7 @@ class CreateApplicantsTable extends Migration
             $table->string('marital_status')->nullable();
             $table->string('spouse_name')->nullable();
             $table->string('qualification')->nullable();
-            $table->string('type_of_disability')->nullable();
+            $table->uuid('type_of_disability')->nullable();
             $table->string('nature_of_disability')->nullable();
             $table->string('cause_of_disability')->nullable();
             $table->string('source_of_income')->nullable();

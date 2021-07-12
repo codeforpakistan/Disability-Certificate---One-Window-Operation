@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\DisabilityType;
+use App\Models\Status;
 
 class ApplicationController extends Controller
 {
@@ -34,6 +35,7 @@ class ApplicationController extends Controller
         }
         $applicant = Applicant::with('resources')->find($request->applicant_id);
         return view('client.applicant.create-stage2', [
+            'status' => Status::where('title', 'Documents Uploaded')->first(),
             'applicant' => $applicant,
             'resources' => $applicant->resources,
         ]);
@@ -65,7 +67,8 @@ class ApplicationController extends Controller
         ]);
         $data = $request->except(['_token']);
         $data['user_id'] = \Auth::id();
-        $data['status'] = "1";
+        $data['status'] = Status::where('title', 'Registered')->first()->id;
+        $data['registration_no'] = (100 + Applicant::count()) . '/' . date('Y') . "-CRPD";
         $applicant = Applicant::create($data);
         return redirect()->route('client.applications.create', ['applicant_id' => $applicant->id]);
     }
@@ -95,18 +98,18 @@ class ApplicationController extends Controller
         if ($request->has('issue') && $request->issue == 'yes') {
             $applicant = Applicant::with('resources')->find($id);
             $applicant->comments = $request->comments;
-            $applicant->status = 5;
+            $applicant->status = Status::where('title', 'Issued Disability Certificate')->first()->id;
             $applicant->save();
         } else if($request->has('issue') && $request->issue == 'reassess'){
             $applicant = Applicant::with('resources')->find($id);
             $applicant->comments = $request->comments;
-            $applicant->status = 9;
+            $applicant->status = Status::where('title', 'Reassessment')->first()->id;
             $applicant->save();
             return redirect()->route('client.dashboard', ['cnic' => $applicant->cnic])->with('success', 'Patient marked for reassessment.');
         } else {
             $applicant = Applicant::with('resources')->find($id);
             $applicant->comments = $request->comments;
-            $applicant->status = 8;
+            $applicant->status = Status::where('title', 'Rejected')->first()->id;
             $applicant->save();
             return redirect()->route('client.dashboard', ['cnic' => $applicant->cnic])->with('success', 'Verification complete.');
         }

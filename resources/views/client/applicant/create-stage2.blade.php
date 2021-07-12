@@ -63,7 +63,7 @@
                         </div>
                     </form>
                     <div class="row mt-5">
-                         @foreach($resources as $resource)
+                        @foreach($resources as $resource)
                             <div class="col-md-2">
                                 <livewire:show-thumbnail :resource="$resource" />
                             </div>
@@ -71,7 +71,7 @@
                     </div>
                     <form method="POST" action="{{ route('client.applications.update', [$applicant->id]) }}">
                         @method("PUT")
-                        <input type="hidden" name="status" value="2">
+                        <input type="hidden" name="status" value="{{ $status->id }}">
                         @csrf
                         <div class="grid grid-cols-1 gap-2 place-items-end">
                             <button class="btn btn-outline-success pull-right" type="submit">

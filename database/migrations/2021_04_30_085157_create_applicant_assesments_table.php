@@ -14,9 +14,9 @@ class CreateApplicantAssesmentsTable extends Migration
     public function up()
     {
         Schema::create('applicant_assesments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('applicant_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('applicant_id');
             $table->text('clinical_findings');
             $table->boolean('fit_for_job');
             $table->boolean('fit_for_driving');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ApplicantAssesment;
 use App\Models\Applicant;
+use App\Models\Status;
 
 class AssessmentController extends Controller
 {
@@ -48,8 +49,8 @@ class AssessmentController extends Controller
         $applicantAssessment = ApplicantAssesment::create($validatedData);
         $applicant = Applicant::with('resources')->find($request->applicant_id);
 
-        if(($applicant->status == 2 && $applicant->assessments->count() == 5) || ($applicant->status == 9 && $applicant->assessments->count() == 10)) {
-            $applicant->status = 3;
+        if(($applicant->applicationStatus->title == 'Documents Uploaded' && $applicant->assessments->count() == 5) || ($applicant->applicationStatus->title == 'Reassessment' && $applicant->assessments->count() == 10)) {
+            $applicant->status = Status::where('title', 'Assessed')->first()->id;
             $applicant->save();
         }
         return redirect()->route('client.dashboard')->with('success'. 'Clinical assessment submitted successfully.');

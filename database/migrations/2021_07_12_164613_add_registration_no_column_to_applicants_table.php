@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ModifyDisabilityTypeColumnToForeignKeyInApplicantTable extends Migration
+class AddRegistrationNoColumnToApplicantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class ModifyDisabilityTypeColumnToForeignKeyInApplicantTable extends Migration
     public function up()
     {
         Schema::table('applicants', function (Blueprint $table) {
-            $table->foreign('type_of_disability')->references('id')->on('disability_types');
+            $table->string('registration_no')->unique()->nullable()->after('cnic');
         });
     }
 
@@ -26,7 +26,7 @@ class ModifyDisabilityTypeColumnToForeignKeyInApplicantTable extends Migration
     public function down()
     {
         Schema::table('applicants', function (Blueprint $table) {
-            $table->dropForeign(['type_of_disability']);
+            $table->dropColumn(['registration_no']);
         });
     }
 }

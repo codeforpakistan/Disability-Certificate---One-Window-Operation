@@ -14,9 +14,9 @@ class CreateResourcesTable extends Migration
     public function up()
     {
         Schema::create('resources', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('applicant_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('applicant_id');
             $table->string('type');
             $table->string('name');
             $table->text('url');

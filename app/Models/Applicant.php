@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Support\Traits\UuidAsPrimaryKey;
 use App\Models\User;
 use App\Models\ApplicantAssesment;
 use App\Models\ApplicantVerification;
@@ -18,6 +19,7 @@ class Applicant extends Model
     use HasFactory;
     use SoftDeletes;
     use LogsActivity;
+    use UuidAsPrimaryKey;
     
     /**
      * The attributes that should be cast.
@@ -36,6 +38,7 @@ class Applicant extends Model
     protected $fillable = [
         'user_id',
         'cnic',
+        'registration_no',
         'dob',
         'name',
         'father_name',

@@ -14,7 +14,6 @@ class ModifyColumnToAForeignKeyInApplicantsTable extends Migration
     public function up()
     {
         Schema::table('applicants', function (Blueprint $table) {
-            $table->unsignedBigInteger('status')->change();
             $table->foreign('status')->references('id')->on('statuses');
         });
     }
@@ -28,7 +27,6 @@ class ModifyColumnToAForeignKeyInApplicantsTable extends Migration
     {
         Schema::table('applicants', function (Blueprint $table) {
             $table->dropForeign(['status']);
-            $table->string('status')->change();
         });
     }
 }

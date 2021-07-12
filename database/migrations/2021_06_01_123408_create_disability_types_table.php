@@ -14,7 +14,7 @@ class CreateDisabilityTypesTable extends Migration
     public function up()
     {
         Schema::create('disability_types', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('type');
             $table->boolean('eligible_for_scnic')->default(false);
             $table->timestamps();
