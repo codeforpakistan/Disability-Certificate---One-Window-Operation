@@ -20,26 +20,26 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('client.applications.store') }}" wire:submit.prevent="submit">
+                    <form method="POST" action="{{ route('client.applications.store') }}">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="cnic">CNIC/CRC</label>
-                                <input class="form-control" id="cnic" name="cnic" type="text" data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X" required>
+                                <input class="form-control" id="cnic" name="cnic" type="text" data-inputmask="'mask': '99999-9999999-9'" value="{{ old('cnic') }}" placeholder="XXXXX-XXXXXXX-X" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="dob">Date of birth</label>
-                                <input class="form-control" id="dob" name="dob" type="date" required>
+                                <input class="form-control" id="dob" name="dob" type="date" value="{{ old('dob') }}" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Applicant name</label>
-                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter applicant name" required>
+                                <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Enter applicant name" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="father_name">Father name</label>
-                                <input class="form-control" id="father_name" name="father_name" type="text" placeholder="Enter father name" required>
+                                <input class="form-control" id="father_name" name="father_name" type="text" value="{{ old('father_name') }}"placeholder="Enter father name" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -54,13 +54,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone_no">Mobile Number</label>
-                                <input class="form-control" id="phone_no" name="phone_no" type="text" data-inputmask="'mask': '0399-9999999'"  placeholder="03XX-XXXXXXX" maxlength="12" required>
+                                <input class="form-control" id="phone_no" name="phone_no" type="text" data-inputmask="'mask': '0399-9999999'" value="{{ old('phone_no') }}" placeholder="03XX-XXXXXXX" maxlength="12" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="address">Address</label>
-                                <input class="form-control" id="address" name="address" type="text" placeholder="Enter address" required>
+                                <input class="form-control" id="address" name="address" type="text" value="{{ old('address') }}" placeholder="Enter address" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="marital_status">Marital Status</label>
@@ -76,13 +76,13 @@
                         <div class="form-row" id="spouse-details">
                             <div class="form-group col-md-12">
                                 <label for="spouse_name">Spouse Name</label>
-                                <input class="form-control" id="spouse_name" name="spouse_name" type="text" placeholder="Enter spouse name">
+                                <input class="form-control" id="spouse_name" name="spouse_name" type="text" value="{{ old('spouse_name') }}" placeholder="Enter spouse name">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="qualification">Qualification</label>
-                                <input class="form-control" id="qualification" name="qualification" type="text" placeholder="Enter qualification" required>
+                                <input class="form-control" id="qualification" name="qualification" type="text" value="{{ old('qualification') }}" placeholder="Enter qualification" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_of_disability">Type of disability</label>
@@ -97,21 +97,21 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="nature_of_disability">Nature of disability</label>
-                                <input class="form-control" id="nature_of_disability" name="nature_of_disability" type="text" placeholder="Enter nature of disability" required>
+                                <input class="form-control" id="nature_of_disability" name="nature_of_disability" type="text" value="{{ old('nature_of_disability') }}"  placeholder="Enter nature of disability" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="cause_of_disability">Cause of disability</label>
-                                <input class="form-control" id="cause_of_disability" name="cause_of_disability" type="text" placeholder="Enter cause of disability" required>
+                                <input class="form-control" id="cause_of_disability" name="cause_of_disability" type="text" value="{{ old('cause_of_disability') }}" placeholder="Enter cause of disability" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="source_of_income">Source of income</label>
-                                <input class="form-control" id="source_of_income" name="source_of_income" type="text" placeholder="Enter source of income" required>
+                                <input class="form-control" id="source_of_income" name="source_of_income" type="text" value="{{ old('source_of_income') }}" placeholder="Enter source of income" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="type_of_job">Type of job (that applicant can do)</label>
-                                <input class="form-control" id="type_of_job" name="type_of_job" type="text" placeholder="Enter type of job" required>
+                                <input class="form-control" id="type_of_job" name="type_of_job" type="text" value="{{ old('type_of_job') }} "placeholder="Enter type of job" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end align-items-baseline">
