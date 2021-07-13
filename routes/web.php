@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('disability-types', "DisabilityTypeController");
         Route::resource('statuses', "StatusController");
         Route::resource('users', "UserController");
+        Route::post('users/check_email', 'UserController@checkEmail')->name('users.check_email');
         Route::resource('roles', "RoleController");
     });
     

@@ -38,7 +38,7 @@
                         <h5 class="modal-title">New user</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.users.store') }}" method="POST">
+                    <form action="{{ route('admin.users.store') }}" method="POST" id="create_new_user">
                         @csrf
                         <div class="modal-body">
                             @if ($errors->any())
@@ -53,18 +53,18 @@
                             @endif
                             <div class="mb-3">
                                 <label class="form-label" for="name">Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Name" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Email" required>
                             </div>
                             <label class="form-label">Role</label>
                             <div class="form-selectgroup-boxes row mb-3">
                                 @foreach ($roles as $role)
                                     <div class="col-lg-3">
                                         <label class="form-selectgroup-item">
-                                            <input type="radio" name="role" value="{{ $role->id}}" class="form-selectgroup-input" {{ $role->name == 'Help Desk' ? 'checked' : ""}} required>
+                                            <input type="radio" name="role" value="{{ $role->id}}" class="form-selectgroup-input" {{ $role->name == 'Help Desk' ? 'checked' : ""}} {{ ($role->name == 'Help Desk' || old('role') == $role->id) ? 'checked' : ""  }} required>
                                             <span class="form-selectgroup-label d-flex align-items-center p-3">
                                                 <span class="me-3">
                                                     <span class="form-selectgroup-check"></span>
@@ -79,16 +79,39 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                            </div>
+                                <div class="input-group input-group-flat">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password should be minimum 8 characters." required>
+                                    <span class="input-group-text">
+                                        <a href="#" id="show_password" class="input-group-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <circle cx="12" cy="12" r="2"></circle>
+                                                <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                                
+                            </div> 
                             <div class="mb-3">
                                 <label class="form-label" for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required>
+                                <div class="input-group input-group-flat">
+                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required>
+                                    <span class="input-group-text">
+                                        <a href="#" id="show_password2" class="input-group-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <circle cx="12" cy="12" r="2"></circle>
+                                                <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
                             </div> 
                         </div>
                         <div class="modal-footer">
                             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-                            <button type="submit" class="btn btn-primary ms-auto">
+                            <button type="submit" class="btn btn-primary ms-auto" id="submit">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg> Create new user
                             </button>
@@ -113,11 +136,63 @@
         <script src="{{ asset('admin/js/buttons.server-side.js') }}"></script>
         {!! $dataTable->scripts() !!}
         <script>
-            @if ($errors->any())
                 $(document).ready(function () {
-                    $('#modal-new-user').modal('show');
+                    @if ($errors->any())
+                        $('#modal-new-user').modal('show');
+                    @endif
+
+                    $("#create_new_user").on('submit', function(e) {
+                        let password = $('#password').val();
+                        let confirm_password = $('#password_confirmation').val();
+                        var submit = true;
+                        e.preventDefault();
+                        $.ajax({
+                            url: '{{ route('admin.users.check_email') }}',
+                            type: 'POST',
+                            data: {
+                                email: $('#email').val()
+                            },
+                            success: function (response) {
+                                if (response.status == 'error') {
+                                    $('#email').focus();
+                                    $('#email').addClass('is-invalid');
+                                    $('#email').after('<span class="invalid-feedback">' + response.message + '</span>');
+                                    submit = false;
+                                } else {
+                                    $('#create_new_user').off('submit').submit();
+                                }
+                            }
+                        });
+                        if (password != confirm_password) {
+                            $('#password').val('');
+                            $('#password_confirmation').val('');
+                            $('#password').focus();
+                            $('#password').addClass('is-invalid');
+                            $('#password_confirmation').addClass('is-invalid');
+                            $('#password').after('<span class="invalid-feedback">Passwords do not match</span>');
+                            submit = false;
+                        }
+                        if ( ! submit ) {
+                            return false;
+                        }
+                    });
+                    $('#show_password, #show_password2').on('click', function() {
+                        let eyeOpen = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="2"></circle><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path></svg>';
+                        let eyeClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="3" y1="3" x2="21" y2="21"></line><path d="M10.584 10.587a2 2 0 0 0 2.828 2.83"></path><path d="M9.363 5.365a9.466 9.466 0 0 1 2.637 -.365c4 0 7.333 2.333 10 7c-.778 1.361 -1.612 2.524 -2.503 3.488m-2.14 1.861c-1.631 1.1 -3.415 1.651 -5.357 1.651c-4 0 -7.333 -2.333 -10 -7c1.369 -2.395 2.913 -4.175 4.632 -5.341"></path></svg>';
+                        // check if the password input type text
+                        if ($('#password').attr('type') == 'password') {
+                            $('#password').attr('type', 'text');
+                            $('#password_confirmation').attr('type', 'text');
+                            $('#show_password').html(eyeClose);
+                            $('#show_password2').html(eyeClose);
+                        } else {
+                            $('#password').attr('type', 'password');
+                            $('#password_confirmation').attr('type', 'password');
+                            $('#show_password').html(eyeOpen);
+                            $('#show_password2').html(eyeOpen);
+                        }
+                    });
                 });
-            @endif
         </script>
     @endpush
 </x-admin.app-layout>

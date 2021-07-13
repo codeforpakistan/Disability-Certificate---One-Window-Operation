@@ -53,6 +53,29 @@ class UserController extends Controller
     }
 
     /**
+     * Check if a user exists for the email provided.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response\Json
+     */
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Email already exists'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Email is available'
+            ]);
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
