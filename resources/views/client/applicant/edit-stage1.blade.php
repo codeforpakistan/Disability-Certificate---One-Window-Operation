@@ -20,12 +20,14 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('client.applications.store') }}">
+                    <form method="POST" action="{{ route('client.applications.update', [$applicant->id]) }}">
                         @csrf
+                        @method("PUT")
+                        <input type="hidden" name="update_mode" value="full">
                         @include('client.applicant.form-stage1')
                         <div class="d-flex justify-content-end align-items-baseline">
                             <x-jet-button>
-                                {{ __('Save and proceed to documents upload') }}
+                                {{ __('Update applicant data') }}
                             </x-jet-button>
                         </div>
                     </form>

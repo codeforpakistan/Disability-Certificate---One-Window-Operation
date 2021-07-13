@@ -69,16 +69,18 @@
                             </div>
                         @endforeach
                     </div>
-                    <form method="POST" action="{{ route('client.applications.update', [$applicant->id]) }}">
-                        @method("PUT")
-                        <input type="hidden" name="status" value="{{ $status->id }}">
-                        @csrf
-                        <div class="grid grid-cols-1 gap-2 place-items-end">
-                            <button class="btn btn-outline-success pull-right" type="submit">
-                                Submit for clinical assessment
-                            </button>
-                        </div>
-                    </form>
+                    @if($requiredDocuments > 0)
+                        <form method="POST" action="{{ route('client.applications.update', [$applicant->id]) }}">
+                            @method("PUT")
+                            <input type="hidden" name="status" value="{{ $status->id }}">
+                            @csrf
+                            <div class="grid grid-cols-1 gap-2 place-items-end">
+                                <button class="btn btn-outline-success pull-right" type="submit">
+                                    Submit for clinical assessment
+                                </button>
+                            </div>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

@@ -34,10 +34,12 @@ class ApplicationController extends Controller
             return redirect()->route('client.applications.index');
         }
         $applicant = Applicant::with('resources')->find($request->applicant_id);
+        
         return view('client.applicant.create-stage2', [
             'status' => Status::where('title', 'Documents Uploaded')->first(),
             'applicant' => $applicant,
             'resources' => $applicant->resources,
+            'requiredDocuments' => $applicant->resources()->whereIn('name', ['CRC', 'CNIC', 'B Form'])->count(),
         ]);
     }
 
@@ -135,6 +137,22 @@ class ApplicationController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $applicant = Applicant::with('resources')->find($id);
+        $disabilityTypes = DisabilityType::pluck('type', 'id');
+        return view('client.applicant.edit-stage1', [
+            'applicant' => $applicant,
+            'disabilityTypes' => $disabilityTypes,
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -143,21 +161,28 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request = $request->except(['_method', '_token']);
+        if ($request->has('update_mode')) {
+            $validatedData = $request->validate([
+                'cnic' => ['required'],
+                'dob' => ['required', 'before:today', 'after:1900-01-01'],
+                'name' => ['required'],
+                'father_name' => ['required'],
+                'phone_no' => ['required'],
+                'address' => ['required'],
+                'gender' => ['required'],
+                'marital_status' => ['required'],
+                'qualification' => ['required'],
+                'type_of_disability' => ['required'],
+                'nature_of_disability' => ['required'],
+                'cause_of_disability' => ['required'],
+                'source_of_income' => ['required'],
+                'type_of_job' => ['required'],
+            ]);
+        }
+        $request = $request->except(['_method', '_token', 'update_mode']);
         $applicant = Applicant::with('resources')->find($id)->update($request);
         if ($applicant) {
             return redirect()->route('client.dashboard')->with('success', 'Applicant data submitted for clinical assessment.');
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

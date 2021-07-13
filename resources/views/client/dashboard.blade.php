@@ -55,6 +55,9 @@
                                     <td class="float-right align-middle">
                                         @if(\Auth::user()->hasRole('Help Desk'))
                                             <a href="{{ route('client.applications.create', ['applicant_id' => $applicant->id]) }}" type="button" class="btn btn-outline-success">Upload Documents</a>
+                                            @if( $applicant->applicationStatus->title == 'Registered' )
+                                                <a href="{{ route('client.applications.edit', [$applicant->id]) }}" type="button" class="btn btn-outline-primary">Edit</a>
+                                            @endif
                                         @endif
                                         @if(\Auth::user()->hasRole('Assessment') && (($applicant->applicationStatus->title == 'Documents Uploaded' && $assessment == 0) || $applicant->applicationStatus->title == 'Reassessment' && $assessment == 1) )
                                             <a href="{{ route("client.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
