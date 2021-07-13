@@ -131,8 +131,10 @@ class ApplicationController extends Controller
     public function assessment(Request $request, $id)
     {
         $applicant = Applicant::with('resources')->find($id);
+        $myAssessment = $applicant->assessments()->where('user_id', \Auth::id())->first();
         return view('client.applicant.create-stage3', [
             'applicant' => $applicant,
+            'myAssessment' => $myAssessment
         ]);
     }
 

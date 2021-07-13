@@ -59,8 +59,12 @@
                                                 <a href="{{ route('client.applications.edit', [$applicant->id]) }}" type="button" class="btn btn-outline-primary">Edit</a>
                                             @endif
                                         @endif
-                                        @if(\Auth::user()->hasRole('Assessment') && (($applicant->applicationStatus->title == 'Documents Uploaded' && $assessment == 0) || $applicant->applicationStatus->title == 'Reassessment' && $assessment == 1) )
-                                            <a href="{{ route("client.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
+                                        @if(\Auth::user()->hasRole('Assessment'))
+                                            @if( ( $applicant->applicationStatus->title == 'Documents Uploaded' && $assessment == 0 ) || ($applicant->applicationStatus->title == 'Reassessment' && $assessment == 1))
+                                                <a href="{{ route("client.applications.assessment", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Assessment</a>
+                                            @else
+                                                    <a href="{{ route('client.applications.assessment', [$applicant->id, 'edit' => 1]) }}" type="button" class="btn btn-outline-primary">Edit My Assessment</a>
+                                            @endif
                                         @endif
                                         @if(\Auth::user()->hasRole('CRPD') && $applicant->applicationStatus->title == "Assessed" )
                                             <a href="{{ route("client.applications.verification", [$applicant->id]) }}" type="button" class="btn btn-outline-success">Start Verification</a>
