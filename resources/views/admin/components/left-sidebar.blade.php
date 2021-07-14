@@ -10,7 +10,7 @@
         </h1>
         <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="navbar-nav pt-lg-3">
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.dashboard') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.dashboard') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -23,7 +23,7 @@
                         <span class="nav-link-title">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.applications.*') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.applications.index') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-forms" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -39,7 +39,7 @@
                         <span class="nav-link-title">Applications</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.disability-types.*') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.disability-types.index') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-disabled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -53,7 +53,7 @@
                         <span class="nav-link-title">Disability Types</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.statuses.*') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.statuses.index') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hierarchy-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -68,7 +68,7 @@
                         <span class="nav-link-title">Statuses</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.users.*') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.users.index') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -82,7 +82,7 @@
                         <span class="nav-link-title">Users</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('admin.roles.*') ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('admin.roles.index') }}" >
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -93,6 +93,19 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">Roles</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('admin.activity-logs.*') ? "active" : "" }}">
+                    <a class="nav-link" href="{{ route('admin.activity-logs.index') }}" >
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                <path d="M16 11l2 2l4 -4"></path>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">Activity Logs</span>
                     </a>
                 </li>
             </ul>
