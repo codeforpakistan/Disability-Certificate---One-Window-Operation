@@ -20,10 +20,13 @@ class ApplicationsDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query->with(['disabilityType']))
+            ->eloquent($query->with(['disabilityType', 'applicationStatus']))
             ->addColumn('action', 'admin.applications.actions')
             ->addColumn('disability_type', function($row){
                 return $row->disabilityType ? $row->disabilityType->type : '';
+            })
+            ->addColumn('application_status', function($row){
+                return $row->applicationStatus ? $row->applicationStatus->title : '';
             })
             ->rawColumns(['action']);
     }
@@ -74,6 +77,7 @@ class ApplicationsDataTable extends DataTable
             Column::make('disability_type')->title('Type of disability'),
             Column::make('nature_of_disability')->title('Nature of disability'),
             Column::make('cause_of_disability')->title('Cause of disability'),
+            Column::make('application_status')->title('Status'),
             Column::computed('action')->title('Actions')
                 ->exportable(false)
                 ->printable(false)
