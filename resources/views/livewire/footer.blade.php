@@ -1,4 +1,9 @@
 <style>
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
     .logo-list {
         text-align: center;
         border-bottom: 1px solid #ddd;
@@ -60,3 +65,12 @@
         <div class="mt-2 text-center">© Copyright {{ date('Y') }}. Designed, Developed and Maintained by <a class="text-green-700 hover:text-blue-400 no-underline hover:underline" href="https://codeforpakistan.org">Code for Pakistan</a>.</div>
     </div>
 </footer>
+@push('scripts')
+    <script>
+        $(function () {
+            if ($(window).scrollTop() - 100 >= $(document).height() - $(window).height() - 100) {
+                $('footer').addClass('footer');
+            }
+        });
+    </script>
+@endpush
