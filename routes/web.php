@@ -35,12 +35,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware(['role:Admin'])->group(function () {
         Route::get('dashboard', "DashboardController@index")->name('dashboard');
-        Route::resource('applications', "ApplicationController");
-        Route::resource('disability-types', "DisabilityTypeController");
-        Route::resource('statuses', "StatusController");
-        Route::resource('users', "UserController");
+        Route::resource('applications', "ApplicationController", ['only' => ['show', 'index']]);
+        Route::resource('disability-types', "DisabilityTypeController", ['only' => ['index', 'store', 'update', 'destroy']]);
+        Route::resource('statuses', "StatusController", ['only' => ['index']]);
+        Route::resource('users', "UserController", ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::post('users/check_email', 'UserController@checkEmail')->name('users.check_email');
-        Route::resource('roles', "RoleController");
+        Route::resource('roles', "RoleController", ['only' => ['index']]);
+        Route::resource('activity-logs', "ActivityLogController", ['only' => ['index']]);
     });
     
 });
