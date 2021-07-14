@@ -32,6 +32,9 @@ class User extends Authenticatable
     use HasRoles;
     use UuidAsPrimaryKey;
 
+    protected static $logFillable = true;
+    protected static $logOnlyDirty = true;
+
     /**
      * The attributes that are mass assignable.
      *

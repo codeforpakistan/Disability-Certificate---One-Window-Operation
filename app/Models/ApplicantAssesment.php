@@ -17,6 +17,10 @@ class ApplicantAssesment extends Model
     use LogsActivity;
     use UuidAsPrimaryKey;
 
+    protected static $logFillable = true;
+    protected static $logOnlyDirty = true;
+    
+
     /**
      * The attributes that are mass assignable.
      *

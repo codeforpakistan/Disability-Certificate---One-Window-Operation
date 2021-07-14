@@ -20,6 +20,10 @@ class Applicant extends Model
     use SoftDeletes;
     use LogsActivity;
     use UuidAsPrimaryKey;
+
+    protected static $logFillable = true;
+    protected static $logOnlyDirty = true;
+    
     
     /**
      * The attributes that should be cast.
