@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('users', "UserController", ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::post('users/check_email', 'UserController@checkEmail')->name('users.check_email');
         Route::resource('roles', "RoleController", ['only' => ['index']]);
-        Route::resource('activity-logs', "ActivityLogController", ['only' => ['index']]);
+        Route::resource('activity-logs', "ActivityLogController", ['only' => ['index', 'show']]);
     });
     
 });

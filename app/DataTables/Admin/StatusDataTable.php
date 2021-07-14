@@ -44,7 +44,7 @@ class StatusDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('users-table')
+            ->setTableId('statuses-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')

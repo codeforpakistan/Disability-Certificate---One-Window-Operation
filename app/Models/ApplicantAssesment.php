@@ -19,7 +19,6 @@ class ApplicantAssesment extends Model
 
     protected static $logFillable = true;
     protected static $logOnlyDirty = true;
-    
 
     /**
      * The attributes that are mass assignable.
