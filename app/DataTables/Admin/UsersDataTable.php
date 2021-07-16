@@ -73,11 +73,11 @@ class UsersDataTable extends DataTable
             Column::make('name')->title('User Name'),
             Column::make('email')->title('Email'),
             Column::make('roles_names')->title('Roles'),
-            // Column::computed('action')->title('Actions')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->addClass('text-center')
-            //     ->width(90),
+            Column::computed('action')->title('Actions')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')
+                ->width(90),
         ];
     }
 

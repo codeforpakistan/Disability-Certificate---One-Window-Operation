@@ -20,9 +20,9 @@ class StatusDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'admin.statuses.actions')
-            ->rawColumns(['action']);    
+            ->eloquent($query);
+            // ->addColumn('action', 'admin.statuses.actions')
+            // ->rawColumns(['action']);    
     }
 
     /**

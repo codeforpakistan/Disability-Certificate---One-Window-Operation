@@ -20,9 +20,9 @@ class RolesDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'admin.roles.actions')
-            ->rawColumns(['action']);            
+            ->eloquent($query);
+            // ->addColumn('action', 'admin.roles.actions')
+            // ->rawColumns(['action']);            
     }
 
     /**
