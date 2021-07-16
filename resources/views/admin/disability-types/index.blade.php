@@ -43,8 +43,9 @@
                         <h5 class="modal-title">New disability type</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.disability-types.store') }}" method="POST">
+                    <form action="{{ route('admin.disability-types.store') }}" method="POST" id="disability-type-form">
                         @csrf
+                        @method('POST')
                         <div class="modal-body">
                             @if ($errors->any())
                                 <div class="alert alert-danger" role="alert">
@@ -64,7 +65,7 @@
                             <div class="form-selectgroup-boxes row mb-3">
                                 <div class="col-lg-6">
                                     <label class="form-selectgroup-item">
-                                        <input type="radio" name="eligible_for_scnic" value="1" class="form-selectgroup-input" {{ old('eligible_for_scnic') == '1' ? 'checked' : ""  }} required>
+                                        <input type="radio" name="eligible_for_scnic" id="eligible_for_scnic_yes" value="1" class="form-selectgroup-input" {{ old('eligible_for_scnic') == '1' ? 'checked' : ""  }} required>
                                         <span class="form-selectgroup-label d-flex align-items-center p-3">
                                             <span class="me-3">
                                                 <span class="form-selectgroup-check"></span>
@@ -77,7 +78,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-selectgroup-item">
-                                        <input type="radio" name="eligible_for_scnic" value="0" class="form-selectgroup-input" {{ old('eligible_for_scnic') == '0' ? 'checked' : ""  }} required>
+                                        <input type="radio" name="eligible_for_scnic" id="eligible_for_scnic_no" value="0" class="form-selectgroup-input" {{ old('eligible_for_scnic') == '0' ? 'checked' : ""  }} required>
                                         <span class="form-selectgroup-label d-flex align-items-center p-3">
                                             <span class="me-3">
                                                 <span class="form-selectgroup-check"></span>
@@ -92,7 +93,7 @@
                         </div>
                         <div class="modal-footer">
                             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-                            <button type="submit" class="btn btn-primary ms-auto">
+                            <button type="submit" class="btn btn-primary ms-auto" id="submit-modal-form">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg> Create new disability type
                             </button>
@@ -117,11 +118,42 @@
         <script src="{{ asset('admin/js/buttons.server-side.js') }}"></script>
         {!! $dataTable->scripts() !!}
         <script>
-            @if ($errors->any())
-                $(document).ready(function () {
-                    $('#modal-new-disability-type').modal('show');
-                });
+            $(document).ready(function () {
+            @if ($errors->any())    
+                $('#modal-new-disability-type').modal('show');
             @endif
+                $('#modal-new-disability-type').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var id = button.data('id');
+                    var type = '';
+                    var eligible_for_scnic = '';
+                    var url = '{{ url('admin/disability-types/') }}';
+                    var method = 'POST';
+                    var modal = $(this);
+                    if( id ) {
+                        type = button.data('type');
+                        eligible_for_scnic = button.data('eligible_for_scnic');
+                        url = '{{ url('admin/disability-types/') }}' + '/' + id;
+                        modal = $(this);
+                        method = 'PUT';
+                        modal.find('.modal-title').text('Edit disability type (' + type + ')');
+                        $("#type").val(type);
+                        $("#eligible_for_scnic_yes").prop("checked", eligible_for_scnic == 1);
+                        $("#eligible_for_scnic_no").prop("checked", eligible_for_scnic == 0);
+                        $('input[name="_method"]').val(method);
+                        $('#disability-type-form').attr('action', url);
+                        $('#submit-modal-form').text('Update disability type');
+                    } else {
+                        modal.find('.modal-title').text('New disability type');
+                        $("#type").val(type);
+                        $("#eligible_for_scnic_yes").prop("checked", false);
+                        $("#eligible_for_scnic_no").prop("checked", false);
+                        $('input[name="_method"]').val(method);
+                        $('#disability-type-form').attr('action', url);
+                        $('#submit-modal-form').text('Create new disability type');
+                    }
+                });
+            });
         </script>
     @endpush
 </x-admin.app-layout>

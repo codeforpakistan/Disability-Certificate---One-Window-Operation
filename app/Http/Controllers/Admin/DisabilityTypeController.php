@@ -41,28 +41,6 @@ class DisabilityTypeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -71,7 +49,13 @@ class DisabilityTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => ['required', 'string', 'max:255'],
+            'eligible_for_scnic' => ['required', 'in:0,1'],
+        ]);
+        $disabilityType = DisabilityType::find($id)->update($validatedData);
+
+        return redirect()->route('admin.disability-types.index')->with('success', 'Disability type updated successfully.');
     }
 
     /**
