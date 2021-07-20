@@ -54,6 +54,13 @@
                         </x-jet-button>
                     </div>
                 </div>
+                <div class="mb-0">
+                    <div class="d-flex justify-content-center align-items-baseline">
+                        <a class="btn btn-outline-secondary" href="{{ route('guest.verify-disability-certificate') }}">
+                            {{ __('View / Verify Disability Certificate.') }}
+                        </a>
+                    </div>
+                </div>
             </form>
         </div>
     </x-jet-authentication-card>
