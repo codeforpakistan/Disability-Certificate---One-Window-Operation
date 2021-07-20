@@ -46,7 +46,7 @@
                 </div>
                 <div class="card-body bg-white px-5 py-3 border-bottom">
                     <div class="row mt-5">
-                         @foreach($applicant->resources as $resource)
+                        @foreach($applicant->resources as $resource)
                             <div class="col-md-3">
                                 <livewire:show-thumbnail :resource="$resource" :imageSize="120" />
                             </div>

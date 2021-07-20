@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('guest')->name('guest.')->group(function () {
+    Route::get('verify-disability-certificate', 'GuestController@index')->name('verify-disability-certificate');
+    Route::post('view-disability-certificate', 'GuestController@show')->name('view-disability-certificate');
+});
 Route::middleware(['auth:sanctum', 'verified', 'is-not-banned'])->group(function () {
     Route::get('/', function () {
         if (\Auth::user()->hasRole('Admin')) {
