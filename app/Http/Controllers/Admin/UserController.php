@@ -110,13 +110,30 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Ban the specified user from accessing the system.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function ban($id)
     {
-        //
+        $user = User::find($id);
+        $user->banned_at = now();
+        $user->save();
+        return redirect()->route('admin.users.index')->with('success', 'User banned successfully.');
+    }
+
+    /**
+     * Un-ban the specified user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unban($id)
+    {
+        $user = User::find($id);
+        $user->banned_at = null;
+        $user->save();
+        return redirect()->route('admin.users.index')->with('success', 'User un-banned successfully.');
     }
 }

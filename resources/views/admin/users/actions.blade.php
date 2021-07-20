@@ -1,46 +1,70 @@
 @php
     $id_for_html = str_replace("-", "_",$id);
 @endphp
-<a href="#" data-bs-toggle="modal" data-bs-target="#modal-new-user">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"></path>
-        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"></path>
-        <line x1="16" y1="5" x2="19" y2="8"></line>
-    </svg>
-</a>
-{{-- <a href="#" onclick="event.preventDefault(); deleteAlert{{ $id_for_html }}();">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <line x1="4" y1="7" x2="20" y2="7"></line>
-        <line x1="10" y1="11" x2="10" y2="17"></line>
-        <line x1="14" y1="11" x2="14" y2="17"></line>
-        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-    </svg>
-</a>
-{!! Form::open(['route' => ['admin.users.destroy', [$id]], 'method' => 'DELETE', 'style' => "display:none;", 'id' => "delete-row-" . $id_for_html]) !!}
-{!! Form::close() !!}
-<script>
-    function deleteAlert{{ $id_for_html }}() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this record!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-row-{{ $id_for_html }}').submit()
-            } else {
-                Swal.fire(
-                    'Deletion Canceled!',
-                    'You canceled deletion of the record!',
-                    'info'
-                )
-            }
-        });
-    }
-</script> --}}
+@if( ! $banned_at )
+    <a href="#" class="text-red" onclick="event.preventDefault(); banUserAlert{{ $id_for_html }}();" title="Ban User">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ban" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="5.7" y1="5.7" x2="18.3" y2="18.3"></line>
+        </svg>
+    </a>
+    {!! Form::open(['route' => ['admin.users.ban', [$id]], 'method' => 'PUT', 'style' => "display:none;", 'id' => "ban-row-" . $id_for_html]) !!}
+    {!! Form::close() !!}
+    <script>
+        function banUserAlert{{ $id_for_html }}() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to ban this user? Once banned this user won't be able to login!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, ban user!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('ban-row-{{ $id_for_html }}').submit()
+                } else {
+                    Swal.fire(
+                        'Canceled!',
+                        'You didn\'t ban the user.',
+                        'info'
+                    )
+                }
+            });
+        }
+    </script>
+@else
+    <a href="#" class="text-green" onclick="event.preventDefault(); unbanUserAlert{{ $id_for_html }}();" title="Unban User">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shield-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 12l2 2l4 -4"></path>
+            <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"></path>
+        </svg>
+    </a>
+    {!! Form::open(['route' => ['admin.users.unban', [$id]], 'method' => 'PUT', 'style' => "display:none;", 'id' => "unban-row-" . $id_for_html]) !!}
+    {!! Form::close() !!}
+    <script>
+        function unbanUserAlert{{ $id_for_html }}() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to unban this user? Once the ban is removed this user will be able to login!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, ban user!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('unban-row-{{ $id_for_html }}').submit()
+                } else {
+                    Swal.fire(
+                        'Canceled!',
+                        'You didn\'t unban the user.',
+                        'info'
+                    )
+                }
+            });
+        }
+    </script>
+@endif

@@ -38,8 +38,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('applications', "ApplicationController", ['only' => ['show', 'index']]);
         Route::resource('disability-types', "DisabilityTypeController", ['only' => ['index', 'store', 'update', 'destroy']]);
         Route::resource('statuses', "StatusController", ['only' => ['index']]);
-        Route::resource('users', "UserController", ['only' => ['index', 'store', 'update', 'destroy']]);
+        Route::resource('users', "UserController", ['only' => ['index', 'store', 'update']]);
         Route::post('users/check_email', 'UserController@checkEmail')->name('users.check_email');
+        Route::put('users/{user}/ban', 'UserController@ban')->name('users.ban');
+        Route::put('users/{user}/unban', 'UserController@unban')->name('users.unban');
         Route::resource('roles', "RoleController", ['only' => ['index']]);
         Route::resource('activity-logs', "ActivityLogController", ['only' => ['index', 'show']]);
     });
