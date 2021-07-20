@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified', 'is-not-banned'])->group(function () {
     Route::get('/', function () {
         if (\Auth::user()->hasRole('Admin')) {
             return redirect()->route('admin.dashboard');

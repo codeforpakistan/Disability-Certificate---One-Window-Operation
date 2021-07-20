@@ -53,7 +53,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, ban user!'
+                confirmButtonText: 'Yes, unban user!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('unban-row-{{ $id_for_html }}').submit()
